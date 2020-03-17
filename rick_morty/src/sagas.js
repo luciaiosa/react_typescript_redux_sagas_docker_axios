@@ -4,12 +4,12 @@ import api from './apis/rick_morty';
 // Generator 
 function* getLocations(action) {
     try {
-        const locations = yield api.get('/location')
+        const json = yield api.get('/location')
             .then(response => response.json());
         yield put({ type: "LOCATIONS_RECEIVED", locations: json.results, });
     }
     catch (e) {
-        yield put({ type: "LOCATIONS_RECEIVED", locations: json.results, });
+        yield put({ type: "LOCATIONS_RECEIVED", locations: [], });
     }
 }
 

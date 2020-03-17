@@ -5,7 +5,7 @@ import {Location, GetLocationsAction} from '../actions/locations';
 
 // the state will have the type od locations array, with the default value an empty array!!
 // the action will have the type GetLocationsAction created in actions/locations.ts !!
-export const locationsReducer = (state: Location[] = [], action: GetLocationsAction) => {
+export default (state: Location[] = [], action: GetLocationsAction) => {
     switch (action.type) {
         case ActionTypes.getLocations:
             /* De la request a la API llega un array de objetos, y lo tengo que convertir a un objeto!!
