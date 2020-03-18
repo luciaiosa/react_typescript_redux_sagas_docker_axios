@@ -25,17 +25,19 @@ interface HeaderProps {
 const Header: FunctionComponent<HeaderProps> = (props: HeaderProps): JSX.Element => {
 
     return (
-        <div>
+        <>
             <BrowserRouter >
                 <LinksContainer>
-                    <Link to="/"><Logo src={logo} alt="logo" /></Link>
-                    <Menu name="menu"></Menu>
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", flexDirection: "column" }}>
+                        <Link to="/"><Logo src={logo} alt="logo" /></Link>
+                        <Menu name="menu"></Menu>
+                    </div>
                 </LinksContainer>
             </BrowserRouter>
 
             <h1>Header: logo, menu, breadcrumbs con navegación</h1>
 
-        </div>
+        </>
     );
 }
 

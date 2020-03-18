@@ -1,7 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-// importar Feather, FontAwesome o cualquier librería de iconos (la tercera columna de la página https://expo.github.io/vector-icons/; 
-// la segunda columna es el nombre del icono que se usa dentro del componente: name="search" )
 import { FaSearch } from 'react-icons/fa';
 
 interface SearchBarProps extends React.HTMLProps<{}> {
@@ -12,9 +10,6 @@ interface SearchBarProps extends React.HTMLProps<{}> {
 const SearchBar: FunctionComponent<SearchBarProps> = (props: SearchBarProps): JSX.Element => {
     return (
         <Div>
-            {/* Usar el icono de la lupa de search */}
-            {/* <Feather name="search" size={30} /> */}
-            {/* <FontAwesome name="search"/> */}
             <FaSearch name="search" style={{fontSize: 35,
                 alignSelf: 'center', 
                 marginTop: 15}} />

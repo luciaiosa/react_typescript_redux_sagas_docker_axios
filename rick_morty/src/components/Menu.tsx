@@ -25,7 +25,7 @@ const Menu: FunctionComponent<MenuProps> = (props: MenuProps): JSX.Element => {
                         I want to pass a prop to the component, so instead of using component, I'll use the render prop. 
                         render accepts a functional component and that function won’t get unnecessarily remounted like with component. 
                         That function will also receive all the same props that component would receive. So I can pass props along to the rendered component. */}
-            <Route path="/characters" exact render={() => <CharactersList resource="character" />} />
+            <Route path="/characters" exact render={() => <CharactersList resource="character"/>} />
             <Route path="/locations" exact render={() => <LocationsList resource="location" />} />
             <Route path="/episodes" exact render={() => <EpisodesList resource="episode" />} />
             <Route path="/episodes/:id" exact render={() => <EpisodeDetail resource="episode" id={1} />} />

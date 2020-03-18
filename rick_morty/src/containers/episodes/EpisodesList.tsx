@@ -1,28 +1,45 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
+// I connect the component with the store
+import { connect } from 'react-redux';
+import { Episode, getEpisodes } from '../../reduxStore/actions';
+import { StoreState } from '../../reduxStore/reducers';
 import useResources from '../../apis/useResources';
+import useSearchResults from '../../hooks/useSearchResults';
+import SearchBar from '../../components/SearchBar';
 
 interface EpisodesListProps {
     resource: string
 }
-interface Episode {
-    id: number;
-    name: string;
-    air_date: Date;
-    url: string;
-}
 
-const EpisodesList: FunctionComponent<EpisodesListProps> = (props: EpisodesListProps): JSX.Element => {
+const _EpisodesList: FunctionComponent<EpisodesListProps> = (props: EpisodesListProps): JSX.Element => {
 
     const resources = useResources(props.resource);
 
+    // usar nuestro hook!!
+    // const [searchResults, results, errorMessge] = useSearchResults();
+    // const [searchTerm, setSearchTerm] = useState("");
+
+    const renderList = (): JSX.Element[] => {
+        return resources.map((episode: Episode) => {
+            return <div key={episode.id}>{episode.name}- {episode.air_date}- {episode.url}</div>
+        });
+    }
+
     return (
-        <div>
+        <div style={{display: "flex", justifyContent: "center", alignItems: "flex-start", flexDirection: "column"}}>
+            {/* <SearchBar
+                searchTerm={searchTerm}
+                onSearchTermChange={(newValue) => setSearchTerm(newValue)}
+            /> */}
             <h2>Episodes:</h2>
-            <ul>
-                {resources.map((item: Episode) => <li key={item.id}>{item.name}- {item.air_date}- {item.url}</li>)}
-            </ul>
+            {renderList()}
         </div>
     )
 }
 
-export default EpisodesList;
+// mapStateToProps receives the entire store state as prop, and returns an object: {episodes: of type Episode array}
+const mapStateToProps = ({episodes}: StoreState): {episodes: Episode[]} => {
+    return {episodes}
+}
+// Connect the component to the store; { getCharacters } is the reducer
+export default connect(mapStateToProps, {getEpisodes})(_EpisodesList);

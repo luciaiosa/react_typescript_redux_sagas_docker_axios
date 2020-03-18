@@ -1,45 +1,48 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
+// I connect the component with the store
+import { connect } from 'react-redux';
+import { Character, getCharacters } from '../../reduxStore/actions';
+import { StoreState } from '../../reduxStore/reducers';
 import useResources from '../../apis/useResources';
-// // import DataTable from 'react-data-components';
+import useSearchResults from '../../hooks/useSearchResults';
+import SearchBar from '../../components/SearchBar';
 
 interface CharactersListProps {
-    resource: string
+    resource: string;
 }
 
-interface Character {
-    id: number;
-    name: string;
-    gender: string;
-    url: string;
-}
+const _CharactersList: FunctionComponent<CharactersListProps> = (props: CharactersListProps): JSX.Element => {
 
-const CharactersList: FunctionComponent<CharactersListProps> = (props: CharactersListProps): JSX.Element => {
     const resources = useResources(props.resource);
+    // usar nuestro hook!!
+    // const [searchResults, results, errorMessge] = useSearchResults();
+    // const [searchTerm, setSearchTerm] = useState("");
 
-    // let columns = [
-    //     { title: 'Name', prop: 'name' },
-    //     { title: 'Gender', prop: 'gender' },
-    //     { title: 'Url', prop: 'url' }
-    // ]
+    const renderList = (): JSX.Element[] => {
+        return resources.map((character: Character) => {
+            return <div key={character.id}>{character.name}- {character.gender}- {character.url}</div>
+        });
+    }
 
     return (
 
-        // <DataTable
-        //     className="container"
-        //     keys="id"
-        //     columns={columns}
-        //     initialData={resources}
-        //     initialPageLength={5}
-        //     initialSortBy={{ prop: 'name', order: 'descending' }}
-        //     pageLengthOptions={[5, 20, 50]}
-        // />
-        <div>
+        //  Esto se puede escribir como un tag vacio, que por defecto coge solo el espacio que hay en la pantalla
+        // <div style={{flex: 1}}>
+        <div style={{display: "flex", justifyContent: "center", alignItems: "flex-start", flexDirection: "column"}}>
+            {/* <SearchBar
+                searchTerm={searchTerm}
+                onSearchTermChange={(newValue) => setSearchTerm(newValue)}
+            /> */}
             <h2>Characters:</h2>
-            <ul>
-                {resources.map((character: Character) => <li key={character.id}>{character.name}- {character.gender}- {character.url}</li>)}
-            </ul>
+            {renderList()}
         </div>
     )
 }
 
-export default CharactersList;
+// mapStateToProps receives the entire store state as prop, and returns an object: {characters: of type Character array}
+const mapStateToProps = ({ characters }: StoreState): { characters: Character[] } => {
+    // using destructuring
+    return { characters }
+}
+// Connect the component to the store; { getCharacters } is the reducer
+export default connect(mapStateToProps, { getCharacters })(_CharactersList);

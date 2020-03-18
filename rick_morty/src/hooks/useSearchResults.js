@@ -21,7 +21,6 @@ export default () => {
         } catch (err) {
             setErrorMessage('Something went wrong');
         }
-
     }
 
     // useEffect (WITH AN ARROW FUNCTION AND AN EMPTY ARRAY AS PARAMS) runs the arrow function that is passed as param ONLY THE FIRST TIME the component is rendered to the screen.
