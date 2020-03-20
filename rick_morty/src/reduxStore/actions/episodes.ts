@@ -14,6 +14,11 @@ export interface GetEpisodesAction {
   payload: Episode[];
 }
 
+export interface GetEpisodeAction {
+  type: ActionTypes.getEpisode;
+  payload: Episode;
+}
+
 export const getEpisodes = () => async (dispatch: Dispatch) => {
   const response = await api.get<Episode[]>("/episode");
   dispatch<GetEpisodesAction>({ type: ActionTypes.getEpisodes, payload: response.data });

@@ -1,7 +1,7 @@
 // Crear un hook nuestro!! Lo vamos a usar en SearchScreen, como cualquier otro hook
 
 import {useEffect, useState} from 'react';
-import axios from '../apis/rick_morty';
+import api from '../apis/rick_morty';
 
 export default () => {
     const [results, setResults] = useState([]);
@@ -11,7 +11,7 @@ export default () => {
     // cuando se renderiza por primera vez, se hace una llamada API, para cargar contenido en la pantalla
     const searchResults = async (resource, searchTerm) => {
         try {
-            const response = await axios.get(`/${resource}/`, {
+            const response = await api.get(`/${resource}/`, {
                 params: {
                     term: searchTerm
                 }
@@ -26,7 +26,7 @@ export default () => {
     // useEffect (WITH AN ARROW FUNCTION AND AN EMPTY ARRAY AS PARAMS) runs the arrow function that is passed as param ONLY THE FIRST TIME the component is rendered to the screen.
     // call searchResults when component is first rendered USING useEffect!! 
     useEffect(() => {
-        searchResults('characters');
+        searchResults('character', "");
     }, [])
     
     return [searchResults, results, errorMessge];

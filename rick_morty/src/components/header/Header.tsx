@@ -1,16 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import Menu from '../Menu';
+import Menu from '../menu/Menu';
+
 const logo = require("../../assets/logo.png");
 
 const LinksContainer = styled.div`
-  font-size: 1em;
-  margin: 1em;
   padding: 0.25em 1em;
   display: flex;
   justify-items: center;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
 `;
 
 const Logo = styled.img`
@@ -19,25 +19,26 @@ const Logo = styled.img`
 `;
 
 interface HeaderProps {
-    primary?: boolean
+    children?: JSX.Element
 }
 
 const Header: FunctionComponent<HeaderProps> = (props: HeaderProps): JSX.Element => {
 
     return (
-        <>
-            <BrowserRouter >
-                <LinksContainer>
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", flexDirection: "column" }}>
-                        <Link to="/"><Logo src={logo} alt="logo" /></Link>
-                        <Menu name="menu"></Menu>
-                    </div>
-                </LinksContainer>
-            </BrowserRouter>
-
-            <h1>Header: logo, menu, breadcrumbs con navegación</h1>
-
-        </>
+        <LinksContainer>
+         {/* <div className="ui secondary pointing menu"> */}
+            <div className="ui secondary pointing menu">
+                
+                <Link to="/" className="link"><Logo src={logo} alt="logo" /></Link>
+                <Menu></Menu>
+                
+            </div>
+            <div>
+            {props.children}
+            </div>
+            
+        {/* </div> */}
+        </LinksContainer>
     );
 }
 

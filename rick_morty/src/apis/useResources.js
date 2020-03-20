@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from './rick_morty';
+import api from './rick_morty';
 
 /* metodo reutilizable usado para traer los personajes/ locaciones/ episodios */
 
@@ -9,7 +9,7 @@ const useResources = resource => {
         () => {
             // declaro y llamo inmediatamente una arrow function con parametro resource
             (async resource => {
-                const response = await axios.get(`/${resource}`);
+                const response = await api.get(`/${resource}`);
 
                 setResources(response.data.results);
             })(resource);

@@ -15,7 +15,17 @@ export interface GetCharactersAction {
   payload: Character[];
 }
 
+export interface GetCharacterAction {
+  type: ActionTypes.getCharacter;
+  payload: number;
+}
+
 export const getCharacters = () => async (dispatch: Dispatch) => {
   const response = await api.get<Character[]>("/character");
   dispatch<GetCharactersAction>({ type: ActionTypes.getCharacters, payload: response.data });
+};
+
+export const getCharacter = (id: number) => async (dispatch: Dispatch) => {
+  const response = await api.get<Character>(`/character/{id}`);
+  dispatch<GetCharacterAction>({ type: ActionTypes.getCharacter, payload: id });
 };

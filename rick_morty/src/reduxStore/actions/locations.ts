@@ -16,11 +16,16 @@ export interface GetLocationsAction {
   payload: Location[];
 }
 
+export interface GetLocationAction {
+  type: ActionTypes.getLocation;
+  payload: Location;
+}
+
 // Async action creator, so I'll use saga!!
 // I use Typescript, so I have to put dispatch (a function with params, and these params have types) a type!! There is a dispatch type in redux, so I use it!
 export const getLocations = () => async (dispatch: Dispatch) => {
   // returns a function that receives dispatch as prop!!
-  // axios.get() returns an array of Locations!!
+  // api.get() returns an array of Locations!!
   const response = await api.get<Location[]>("/location");
   // type in typescript = type of an object or a property or a function
   // type in redux = type that an action object has

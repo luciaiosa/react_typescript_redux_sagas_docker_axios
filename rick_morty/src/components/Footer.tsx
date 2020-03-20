@@ -8,12 +8,12 @@ const FooterContainer = styled.div`
 `
 
 interface FooterProps {
-    name: string
+    content: string
 }
 const Footer: FunctionComponent<FooterProps> = (props: FooterProps): JSX.Element => {
     return (
         <FooterContainer>
-            <p>Footer: Contacta con nosotros</p>
+            <p>{props.content}</p>
         </FooterContainer>
     );
 };

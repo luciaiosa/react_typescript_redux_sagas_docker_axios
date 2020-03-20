@@ -1,26 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { logger } from 'redux-logger';
 import App from './containers/app/App';
 import * as serviceWorker from './serviceWorker';
-import {reducers} from './reduxStore/reducers';
+import { reducers } from './reduxStore/reducers';
 import saga from './sagas';
+
+// add redux store devtools chrome extension
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Create saga middleware
 const sagaMiddleware = createSagaMiddleware();
 // Initialize redux store. This store uses two middlewares: logger and SAGA. Redux-logger tool to inspect in console panel triggered actions and state of Redux store.
-const store = createStore(reducers, applyMiddleware(sagaMiddleware, logger));
+const store = createStore(
+    reducers, 
+    applyMiddleware(sagaMiddleware, logger)
+    // composeEnhancers(applyMiddleware(sagaMiddleware, logger))
+);
 
 sagaMiddleware.run(saga);
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <App />
     </Provider>,
-     document.getElementById('root'));
+    document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
