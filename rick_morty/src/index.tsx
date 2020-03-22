@@ -6,7 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import { logger } from 'redux-logger';
 import App from './containers/app/App';
 import * as serviceWorker from './serviceWorker';
-import { reducers } from './reduxStore/reducers';
+import { rootReducers } from './reduxStore/reducers';
 import saga from './sagas';
 
 // add redux store devtools chrome extension
@@ -14,9 +14,22 @@ import saga from './sagas';
 
 // Create saga middleware
 const sagaMiddleware = createSagaMiddleware();
+
+// export function configureStore(initialState) {
+//     const middleware = [sagaMiddleware];
+   
+//     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//     const store = createStore
+//         (reducers, initialState, composeEnhancers(applyMiddleware(...middleware, logger)));
+   
+//     sagaMiddleware.run(saga);
+   
+//     return store;
+//    }
+
 // Initialize redux store. This store uses two middlewares: logger and SAGA. Redux-logger tool to inspect in console panel triggered actions and state of Redux store.
 const store = createStore(
-    reducers, 
+    rootReducers, 
     applyMiddleware(sagaMiddleware, logger)
     // composeEnhancers(applyMiddleware(sagaMiddleware, logger))
 );

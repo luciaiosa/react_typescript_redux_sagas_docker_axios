@@ -1,7 +1,7 @@
 import { ActionTypes, Action } from "../../enums/actionTypes";
-import {StoreState, DefaultStoreState} from '../reducers';
+import { EpisodeStoreState, InitialEpisodeStoreState } from "../storeStates";
 
-export default (state: StoreState = DefaultStoreState, action: Action): StoreState => {
+export default (state: EpisodeStoreState = InitialEpisodeStoreState, action: Action): EpisodeStoreState => {
     switch (action.type) {
         case ActionTypes.getEpisodes:
             return {...state, episodes: action.payload};

@@ -1,7 +1,7 @@
 import { ActionTypes, Action } from "../../enums/actionTypes";
-import { StoreState, DefaultStoreState } from '../reducers';
+import { LocationStoreState, InitialLocationStoreState } from "../storeStates";
 
-export default (state: StoreState = DefaultStoreState, action: Action): StoreState => {
+export default (state: LocationStoreState = InitialLocationStoreState, action: Action): LocationStoreState => {
     switch (action.type) {
         case ActionTypes.getLocations:
             return {...state, locations: action.payload};
