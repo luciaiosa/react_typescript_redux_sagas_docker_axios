@@ -1,0 +1,15 @@
+.search-bar-container {
+    background-color: '#F0EEEE';
+    height: 50px;
+    border-radius: 5px;
+    margin: 15px;
+    flex-direction: 'row';
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+        
+.search-bar-input {
+    flex: 1;
+    font-size: 18;
+}
+        

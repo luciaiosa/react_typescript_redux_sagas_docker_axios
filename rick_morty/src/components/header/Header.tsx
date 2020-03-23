@@ -11,6 +11,8 @@ const LinksContainer = styled.div`
   justify-items: center;
   align-items: flex-start;
   flex-direction: column;
+  margin-bottom: 20px;
+  width: 100vh;
 `;
 
 const Logo = styled.img`
@@ -25,8 +27,7 @@ interface HeaderProps {
 const Header: FunctionComponent<HeaderProps> = (props: HeaderProps): JSX.Element => {
 
     return (
-        <LinksContainer>
-         {/* <div className="ui secondary pointing menu"> */}
+        <LinksContainer className="links-container">
             <div className="ui secondary pointing menu">
                 
                 <Link to="/" className="link"><Logo src={logo} alt="logo" /></Link>

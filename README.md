@@ -79,6 +79,12 @@ yarn add react-router-dom @types/react-router-dom --save
 yarn add react-data-components @types/react-data-components --save
 ```
 
+## Install material-ui
+```
+yarn add @material-ui/core
+```
+
+
 ## Install styled-components
 ```
 yarn add styled-components @types/styled-components --save

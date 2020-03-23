@@ -1,0 +1,12 @@
+.breadcrumb-link {
+    text-decoration: none;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+    align-self: center;
+}
+.breadcrumb-link:hover {
+    color: #1da2b3;
+}
+.breadcrumbs-links {
+    display: inline;
+}

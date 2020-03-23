@@ -8,3 +8,6 @@
 .link:hover {
     color: #1da2b3;
   }
+  .link:active {
+    color: rgb(255, 152, 0);
+}
