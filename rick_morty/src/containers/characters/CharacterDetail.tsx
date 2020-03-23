@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
     characterByIdRequest,
     CharacterStore,
@@ -9,11 +10,26 @@ import {
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+            overflow: 'hidden',
+            backgroundColor: theme.palette.background.paper,
+            flexDirection: 'column',
+            minHeight: 500 
+        }
+    }),
+);
+
 type TParams = { id: string };
 
 const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
     props
 ): JSX.Element => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const { selectedCharacter } = useSelector<AppStore, CharacterStore>(
         state => state.characterStore
@@ -71,7 +87,7 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
         return <div>Character Not Found!</div>;
     };
     return (
-        <div>
+        <div className={classes.root}>
             {renderContent()}
         </div>
     );

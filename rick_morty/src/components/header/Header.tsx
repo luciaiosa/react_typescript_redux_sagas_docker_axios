@@ -3,21 +3,33 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import Menu from '../menu/Menu';
 
-const logo = require("../../assets/logo.png");
+const logo = require("../../assets/logo1.png");
 
 const LinksContainer = styled.div`
-  padding: 0.25em 1em;
   display: flex;
   justify-items: center;
   align-items: flex-start;
   flex-direction: column;
   margin-bottom: 20px;
-  width: 100vh;
+  width: 100%;
+  font-size: large;
+`;
+
+const MenuContainer = styled.div`
+    border-bottom: 2px solid rgba(34,36,38,.15);
+    border-radius: 0;
+    font-size: 1rem;
+    display: flex;
+    width: 100%;
+    padding: 1rem;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    font-weight: 600;
+    min-height: 3rem;
 `;
 
 const Logo = styled.img`
-    width: 60px;
-    heigth: 60px;
+    width: 100px;
+    heigth: 90px;
 `;
 
 interface HeaderProps {
@@ -27,13 +39,11 @@ interface HeaderProps {
 const Header: FunctionComponent<HeaderProps> = (props: HeaderProps): JSX.Element => {
 
     return (
-        <LinksContainer className="links-container">
-            <div className="ui secondary pointing menu">
-                
+        <LinksContainer>
+            <MenuContainer>                
                 <Link to="/" className="link"><Logo src={logo} alt="logo" /></Link>
-                <Menu></Menu>
-                
-            </div>
+                <Menu></Menu>               
+            </MenuContainer>
             <div>
             {props.children}
             </div>

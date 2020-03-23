@@ -5,13 +5,13 @@ import Footer from "../../components/footer/Footer";
 import CustomBreadcrumbs from "../../components/breadcrumbs/Breadcrumbs";
 import "./App.css";
 import CharactersList from "../characters/CharacterList";
-import CharacterDetail from "../characters/CharacterDetail";
 import { useSelector } from "react-redux";
 import { AppStore } from "../../store/app/AppStore";
 import Home from "../home/Home";
 import Spinner from "../../components/spinner/Spinner";
 import literals from "../../resources/literals.json";
 import { Container } from '@material-ui/core';
+import CharacterDetail from "../characters/CharacterDetail";
 
 // BrowserRouter is the router implementation for HTML5 browsers (vs Native).
 // Link is the replacement for anchor tags.
@@ -19,7 +19,7 @@ import { Container } from '@material-ui/core';
 // Switch returns only the first matching route rather than all matching routes.
 
 const App: FunctionComponent = () => {
-    const { breadcrumbs, loading, characterStore } = useSelector<AppStore, AppStore>(
+    const { breadcrumbs, loading } = useSelector<AppStore, AppStore>(
         state => state
     );
     return (
@@ -51,8 +51,9 @@ const App: FunctionComponent = () => {
                         <Route path="/episodes" exact render={() => <EpisodesList resource="episode" />} />
                         <Route path="/episodes/:id" exact render={() => <EpisodeDetail resource="episode" id={1} />} /> */}
                     </Switch>
+                    <Footer copyright= "❮❯ by Opinno 2020" />
                 </BrowserRouter>
-                <Footer content={{copyright: "❮❯ by Opinno 2020", charactersNumber: characterStore.characters.length}} />
+            
             </div>
         </Container>
     );
