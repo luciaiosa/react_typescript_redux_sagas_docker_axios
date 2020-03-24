@@ -10,8 +10,10 @@ import { AppStore } from "../../store/app/AppStore";
 import Home from "../home/Home";
 import Spinner from "../../components/spinner/Spinner";
 import literals from "../../resources/literals.json";
-import { Container } from '@material-ui/core';
+import { Container } from "@material-ui/core";
 import CharacterDetail from "../characters/CharacterDetail";
+import EpisodesList from "../episodes/EpisodeList";
+import LocationsList from "../locations/LocationList";
 
 // BrowserRouter is the router implementation for HTML5 browsers (vs Native).
 // Link is the replacement for anchor tags.
@@ -24,7 +26,7 @@ const App: FunctionComponent = () => {
     );
     return (
         <Container>
-            <div style={{ minHeight: '100vh' }} >
+            <div style={{ minHeight: "100vh" }}>
                 {loading ? <Spinner message={literals.loadingMessage} /> : null}
                 <BrowserRouter>
                     <Header>
@@ -43,17 +45,27 @@ const App: FunctionComponent = () => {
                             component={CharactersList}
                         />
                         <Route
+                            path="/episodes"
+                            exact
+                            component={EpisodesList}
+                        />
+                        <Route
+                            path="/locations"
+                            exact
+                            component={LocationsList}
+                        />
+                        <Route
                             path="/characters/:id"
                             exact
                             component={CharacterDetail}
                         />
+
                         {/* <Route path="/locations" exact render={() => <LocationsList resource="location" />} />
                         <Route path="/episodes" exact render={() => <EpisodesList resource="episode" />} />
                         <Route path="/episodes/:id" exact render={() => <EpisodeDetail resource="episode" id={1} />} /> */}
                     </Switch>
-                    <Footer copyright= "❮❯ by Opinno 2020" />
+                    <Footer copyright="❮❯ by Opinno 2020" />
                 </BrowserRouter>
-            
             </div>
         </Container>
     );

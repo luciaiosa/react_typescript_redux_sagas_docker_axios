@@ -5,20 +5,21 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import {
-    charactersRequest,
-    CharacterStore,
-    Character
-} from "../../store/characters";
+    locationsRequest,
+    LocationStore,
+    Location
+} from "../../store/locations";
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import SearchBar from "../../components/search-bar/SearchBar";
-import { styles } from "./CharacterStyles";
+import image from "../../assets/location.jpeg";
+import { styles } from "./LocationStyles";
 
-const CharactersList: FunctionComponent = (): JSX.Element => {
+const LocationsList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const { characters } = useSelector<AppStore, CharacterStore>(
-        state => state.characterStore
+    const { locations } = useSelector<AppStore, LocationStore>(
+        state => state.locationStore
     );
     const dispatch = useDispatch();
     const breadCrumbs: BreadCrumb[] = [
@@ -28,18 +29,18 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
             link: "/"
         },
         {
-            key: "CharacterList",
-            label: "Character List",
+            key: "LocationsList",
+            label: "Locations List",
             link: null
         }
     ];
     useEffect(() => {
-        dispatch(charactersRequest());
+        dispatch(locationsRequest());
         dispatch(setBreadcrumbs(breadCrumbs));
     }, []);
 
     const onSearchBarTerm = () => {
-        dispatch(charactersRequest(searchTerm));
+        dispatch(locationsRequest(searchTerm));
     };
 
     const onSearchBarValueChange = (value: string) => {
@@ -47,11 +48,11 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
     };
 
     const renderList = (): JSX.Element[] => {
-        return characters.map((tile: Character) => {
+        return locations.map((tile: Location) => {
             return (
                 <GridListTile key={tile.id}>
-                    <img src={tile.image} alt={tile.name} />
-                    <Link to={`/characters/${tile.id}`} className="header">
+                    <img src={image} alt={tile.name} />
+                    <Link to={`/location/${tile.id}`} className="header">
                         <GridListTileBar
                             title={tile.name}
                             subtitle={
@@ -70,7 +71,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
         <div className={classes.root}>
             <div className={classes.container}>
                 <div className={classes.pageHeader}>
-                    <h2>Characters list</h2>
+                    <h2>Locations list</h2>
                     <SearchBar
                         searchTerm={searchTerm}
                         onSearchValueChange={value =>
@@ -91,4 +92,4 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
     );
 };
 
-export default CharactersList;
+export default LocationsList;

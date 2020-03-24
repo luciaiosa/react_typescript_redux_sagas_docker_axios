@@ -2,23 +2,23 @@ import React, { FunctionComponent, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    characterByIdRequest,
-    CharacterStore,
-    clearCharacterSelected
-} from "../../store/characters";
+    locationByIdRequest,
+    LocationStore,
+    clearLocationSelected
+} from "../../store/locations";
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
-import { styles } from "./CharacterStyles";
+import { styles } from "./LocationStyles";
 
 type TParams = { id: string };
 
-const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
+const LocationDetail: FunctionComponent<RouteComponentProps<TParams>> = (
     props
 ): JSX.Element => {
     const classes = styles();
     const dispatch = useDispatch();
-    const { selectedCharacter } = useSelector<AppStore, CharacterStore>(
-        state => state.characterStore
+    const { selectedLocation } = useSelector<AppStore, LocationStore>(
+        state => state.locationStore
     );
 
     useEffect(() => {
@@ -30,50 +30,50 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
                 link: "/"
             },
             {
-                key: "CharacterList",
-                label: "Character List",
-                link: "/characters"
+                key: "LocationsList",
+                label: "Location List",
+                link: "/locations"
             },
             {
-                key: "CharacterDetail",
-                label: "Character Info",
+                key: "LocationDetail",
+                label: "Location Info",
                 link: null
             }
         ];
         dispatch(setBreadcrumbs(breadCrumbs));
-        dispatch(characterByIdRequest(parseInt(params.id)));
+        dispatch(locationByIdRequest(parseInt(params.id)));
         //ComponentWillUnMount()
         return () => {
-            dispatch(clearCharacterSelected());
+            dispatch(clearLocationSelected());
         };
     }, [dispatch]);
 
     const renderContent = () => {
-        if (selectedCharacter !== undefined) {
+        if (selectedLocation !== undefined) {
             return (
                 <div>
-                    <h2>{selectedCharacter.name}</h2>
+                    <h2>{selectedLocation.name}</h2>
                     <div className="content">
                         <div className="description">
-                            Id: {selectedCharacter.id} - created{" "}
-                            {selectedCharacter.created}
+                            Id: {selectedLocation.id} - created{" "}
+                            {selectedLocation.created}
                         </div>
                         <div className="description">
-                            Status: {selectedCharacter.status}
+                            Type: {selectedLocation.type}
                         </div>
                         <div className="description">
-                            Species: {selectedCharacter.species}
+                            Dimension: {selectedLocation.dimension}
                         </div>
                         <div className="description">
-                            Gender: {selectedCharacter.gender}
+                            Url: {selectedLocation.url}
                         </div>
                     </div>
                 </div>
             );
         }
-        return <div>Character Not Found!</div>;
+        return <div>Location Not Found!</div>;
     };
     return <div className={classes.root}>{renderContent()}</div>;
 };
 
-export default CharacterDetail;
+export default LocationDetail;

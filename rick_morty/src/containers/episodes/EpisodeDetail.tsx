@@ -2,23 +2,23 @@ import React, { FunctionComponent, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    characterByIdRequest,
-    CharacterStore,
-    clearCharacterSelected
-} from "../../store/characters";
+    episodeByIdRequest,
+    EpisodeStore,
+    clearEpisodeSelected
+} from "../../store/episodes";
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
-import { styles } from "./CharacterStyles";
+import { styles } from "./EpisodeStyles";
 
 type TParams = { id: string };
 
-const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
+const EpisodeDetail: FunctionComponent<RouteComponentProps<TParams>> = (
     props
 ): JSX.Element => {
     const classes = styles();
     const dispatch = useDispatch();
-    const { selectedCharacter } = useSelector<AppStore, CharacterStore>(
-        state => state.characterStore
+    const { selectedEpisode } = useSelector<AppStore, EpisodeStore>(
+        state => state.episodeStore
     );
 
     useEffect(() => {
@@ -30,50 +30,50 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
                 link: "/"
             },
             {
-                key: "CharacterList",
-                label: "Character List",
-                link: "/characters"
+                key: "EpisodesList",
+                label: "Episodes List",
+                link: "/episodes"
             },
             {
-                key: "CharacterDetail",
-                label: "Character Info",
+                key: "EpisodeDetail",
+                label: "Episode Info",
                 link: null
             }
         ];
         dispatch(setBreadcrumbs(breadCrumbs));
-        dispatch(characterByIdRequest(parseInt(params.id)));
+        dispatch(episodeByIdRequest(parseInt(params.id)));
         //ComponentWillUnMount()
         return () => {
-            dispatch(clearCharacterSelected());
+            dispatch(clearEpisodeSelected());
         };
     }, [dispatch]);
 
     const renderContent = () => {
-        if (selectedCharacter !== undefined) {
+        if (selectedEpisode !== undefined) {
             return (
                 <div>
-                    <h2>{selectedCharacter.name}</h2>
+                    <h2>{selectedEpisode.name}</h2>
                     <div className="content">
                         <div className="description">
-                            Id: {selectedCharacter.id} - created{" "}
-                            {selectedCharacter.created}
+                            Id: {selectedEpisode.id} - created{" "}
+                            {selectedEpisode.created}
                         </div>
                         <div className="description">
-                            Status: {selectedCharacter.status}
+                            Air date: {selectedEpisode.air_date}
                         </div>
                         <div className="description">
-                            Species: {selectedCharacter.species}
+                            Episode: {selectedEpisode.episode}
                         </div>
                         <div className="description">
-                            Gender: {selectedCharacter.gender}
+                            Url: {selectedEpisode.url}
                         </div>
                     </div>
                 </div>
             );
         }
-        return <div>Character Not Found!</div>;
+        return <div>Episode Not Found!</div>;
     };
     return <div className={classes.root}>{renderContent()}</div>;
 };
 
-export default CharacterDetail;
+export default EpisodeDetail;

@@ -1,7 +1,7 @@
 import React from "react";
 import { BreadCrumb } from "../../store/app/AppStore";
 import { Link } from "react-router-dom";
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 import "./Breadcrumbs.css";
 
 const useStyles = makeStyles(() =>
@@ -11,12 +11,12 @@ const useStyles = makeStyles(() =>
             marginBottom: 20
         },
         breadcrumbsLinks: {
-            display: 'inline'
+            display: "inline"
         },
         breadcrumbSpan: {
-            color: '#424548'
+            color: "#808080"
         }
-    }),
+    })
 );
 
 interface BreadcrumbsProps {
@@ -44,16 +44,25 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
                     <Link
                         to={breadcrumb.link!}
                         className="breadcrumb-link"
-                        key={breadcrumb.link} 
+                        key={breadcrumb.link}
                     >
                         {breadcrumb.label}
                     </Link>
-                    <span key={breadcrumb.label} className={classes.breadcrumbSpan}> / </span>
+                    <span
+                        key={breadcrumb.label}
+                        className={classes.breadcrumbSpan}
+                    >
+                        {" "}
+                        /{" "}
+                    </span>
                 </div>
-
             );
         }
-    return <span key={breadcrumb.key} className={classes.breadcrumbSpan}>{breadcrumb.label}</span>;
+        return (
+            <span key={breadcrumb.key} className={classes.breadcrumbSpan}>
+                {breadcrumb.label}
+            </span>
+        );
     };
 
     return <div className={classes.breadcrumbsContainer}>{renderItems()}</div>;

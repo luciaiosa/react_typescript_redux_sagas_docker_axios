@@ -5,8 +5,26 @@ import {
     GETTING_CHARACTER_BYID,
     apiCharacterById
 } from "./characters";
+import {
+    GETTING_EPISODES,
+    apiEpisodes,
+    GETTING_EPISODE_BYID,
+    apiEpisodeById
+} from "./episodes";
+import {
+    GETTING_LOCATIONS,
+    apiLocations,
+    GETTING_LOCATION_BYID,
+    apiLocationById
+} from "./locations";
 
 export function* rootSaga() {
     yield takeLatest(GETTING_CHARACTERS, apiCharacters);
     yield takeLatest(GETTING_CHARACTER_BYID, apiCharacterById);
+
+    yield takeLatest(GETTING_EPISODES, apiEpisodes);
+    yield takeLatest(GETTING_EPISODE_BYID, apiEpisodeById);
+
+    yield takeLatest(GETTING_LOCATIONS, apiLocations);
+    yield takeLatest(GETTING_LOCATION_BYID, apiLocationById);
 }

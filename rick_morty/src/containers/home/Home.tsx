@@ -1,41 +1,15 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import Button from "../../components-ui/Button";
 import "./Home.css";
 import { useDispatch } from "react-redux";
 import { setBreadcrumbs } from "../../store/app";
 import charactersImage from "../../assets/characters.jpeg";
 import episodesImage from "../../assets/episodes.jpeg";
 import locationsImage from "../../assets/location.jpeg";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-around",
-            overflow: "hidden",
-            backgroundColor: theme.palette.background.paper,
-            flexDirection: "column"
-        },
-        container: {
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            alignContent: "center",
-            overflow: "hidden",
-            flexDirection: "column"
-        },
-        gridList: {
-            width: "100%",
-            height: "auto"
-        }
-    })
-);
+import { styles } from "./HomeStyles";
 
 // BrowserRouter is the router implementation for HTML5 browsers (vs Native).
 // Link is the replacement for anchor tags.
@@ -43,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
 // Switch returns only the first matching route rather than all matching routes.
 
 const Home: FunctionComponent = () => {
-    const classes = useStyles();
+    const classes = styles();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(setBreadcrumbs([]));
@@ -52,7 +26,7 @@ const Home: FunctionComponent = () => {
         <div className={classes.root}>
             <div className={classes.container}>
                 <h2>Welcome to Rick and Morty page!</h2>
-                <p>
+                <p className={classes.description}>
                     Rick and Morty is a television show. <br />
                     The American animated television show is created by Justin
                     Roiland and Dan Harmon. It premiered on Cartoon Network's
@@ -66,10 +40,11 @@ const Home: FunctionComponent = () => {
                 <GridList
                     cellHeight={280}
                     cols={2}
+                    spacing={10}
                     className={classes.gridList}
                 >
                     <GridListTile>
-                        <img src={charactersImage} alt="characters image" />
+                        <img src={charactersImage} alt="characters" />
                         <Link to={`/characters`} className="header">
                             <GridListTileBar
                                 title="Go to Characters list"
@@ -78,7 +53,7 @@ const Home: FunctionComponent = () => {
                         </Link>
                     </GridListTile>
                     <GridListTile>
-                        <img src={episodesImage} alt="episodes image" />
+                        <img src={episodesImage} alt="episodes" />
                         <Link to={`/episodes`} className="header">
                             <GridListTileBar
                                 title="Go to Episodes list"
@@ -87,7 +62,7 @@ const Home: FunctionComponent = () => {
                         </Link>
                     </GridListTile>
                     <GridListTile>
-                        <img src={locationsImage} alt="locations image" />
+                        <img src={locationsImage} alt="locations" />
                         <Link to={`/locations`} className="header">
                             <GridListTileBar
                                 title="Go to Locations list"

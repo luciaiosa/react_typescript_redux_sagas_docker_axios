@@ -4,21 +4,18 @@ import { Link } from "react-router-dom";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import {
-    charactersRequest,
-    CharacterStore,
-    Character
-} from "../../store/characters";
+import { episodesRequest, EpisodeStore, Episode } from "../../store/episodes";
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import SearchBar from "../../components/search-bar/SearchBar";
-import { styles } from "./CharacterStyles";
+import image from "../../assets/episodes.jpeg";
+import { styles } from "./EpisodeStyles";
 
-const CharactersList: FunctionComponent = (): JSX.Element => {
+const EpisodesList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const { characters } = useSelector<AppStore, CharacterStore>(
-        state => state.characterStore
+    const { episodes } = useSelector<AppStore, EpisodeStore>(
+        state => state.episodeStore
     );
     const dispatch = useDispatch();
     const breadCrumbs: BreadCrumb[] = [
@@ -28,18 +25,18 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
             link: "/"
         },
         {
-            key: "CharacterList",
-            label: "Character List",
+            key: "EpisodeList",
+            label: "Episodes List",
             link: null
         }
     ];
     useEffect(() => {
-        dispatch(charactersRequest());
+        dispatch(episodesRequest());
         dispatch(setBreadcrumbs(breadCrumbs));
     }, []);
 
     const onSearchBarTerm = () => {
-        dispatch(charactersRequest(searchTerm));
+        dispatch(episodesRequest(searchTerm));
     };
 
     const onSearchBarValueChange = (value: string) => {
@@ -47,11 +44,11 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
     };
 
     const renderList = (): JSX.Element[] => {
-        return characters.map((tile: Character) => {
+        return episodes.map((tile: Episode) => {
             return (
-                <GridListTile key={tile.id}>
-                    <img src={tile.image} alt={tile.name} />
-                    <Link to={`/characters/${tile.id}`} className="header">
+                <GridListTile key={tile.episode}>
+                    <img src={image} alt={tile.name} />
+                    <Link to={`/episode/${tile.id}`} className="header">
                         <GridListTileBar
                             title={tile.name}
                             subtitle={
@@ -70,7 +67,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
         <div className={classes.root}>
             <div className={classes.container}>
                 <div className={classes.pageHeader}>
-                    <h2>Characters list</h2>
+                    <h2>Episodes list</h2>
                     <SearchBar
                         searchTerm={searchTerm}
                         onSearchValueChange={value =>
@@ -91,4 +88,4 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
     );
 };
 
-export default CharactersList;
+export default EpisodesList;

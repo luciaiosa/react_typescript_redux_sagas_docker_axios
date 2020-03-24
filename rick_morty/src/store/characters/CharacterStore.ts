@@ -6,18 +6,15 @@ export interface Character {
     image: string;
     gender: string;
     url: string;
-    created: string
+    created: string;
 }
 
 export const InitialCharacterStore: CharacterStore = {
     characters: [],
-    selectedCharacter: undefined,
-    loading: false
-}
-
+    selectedCharacter: undefined
+};
 
 export interface CharacterStore {
-    readonly characters: Character[],
-    readonly selectedCharacter: Character | undefined,
-    readonly loading: boolean
+    readonly characters: Character[];
+    readonly selectedCharacter: Character | undefined;
 }
