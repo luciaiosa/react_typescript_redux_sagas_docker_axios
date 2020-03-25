@@ -4,9 +4,12 @@ export const GETTING_CHARACTER_BYID = "GETTING_CHARACTER_BYID";
 export const GOT_CHARACTER_BYID = "GOT_CHARACTER_BYID";
 export const CLEAR_CHARACTER_SELECTED = "CLEAR_CHARACTER_SELECTED";
 
-export const charactersRequest = (searchTerm?: string) => ({
+export const charactersRequest = (
+    searchTerm?: string,
+    currentPage?: number
+) => ({
     type: GETTING_CHARACTERS,
-    payload: searchTerm
+    payload: { searchTerm, currentPage }
 });
 
 export const charactersRequestSuccess = (payload: any) => ({

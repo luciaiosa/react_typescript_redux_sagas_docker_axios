@@ -10,11 +10,13 @@ export interface Character {
 }
 
 export const InitialCharacterStore: CharacterStore = {
+    pages: 1,
     characters: [],
     selectedCharacter: undefined
 };
 
 export interface CharacterStore {
+    readonly pages: number;
     readonly characters: Character[];
     readonly selectedCharacter: Character | undefined;
 }

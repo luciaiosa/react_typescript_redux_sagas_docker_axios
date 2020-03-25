@@ -13,11 +13,14 @@ import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import SearchBar from "../../components/search-bar/SearchBar";
 import { styles } from "./CharacterStyles";
+import Pager from "../../components/pager/Pager";
 
 const CharactersList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const { characters } = useSelector<AppStore, CharacterStore>(
+    const [currentPage, setCurrentPage] = useState<number>(1);
+
+    const { characters, pages } = useSelector<AppStore, CharacterStore>(
         state => state.characterStore
     );
     const dispatch = useDispatch();
@@ -34,29 +37,49 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
         }
     ];
     useEffect(() => {
-        dispatch(charactersRequest());
+        dispatch(charactersRequest("", 1));
         dispatch(setBreadcrumbs(breadCrumbs));
     }, []);
 
     const onSearchBarTerm = () => {
-        dispatch(charactersRequest(searchTerm));
+        dispatch(charactersRequest(searchTerm, 1));
     };
 
     const onSearchBarValueChange = (value: string) => {
         setSearchTerm(value);
     };
 
+    const onCurrentPageChange = (value: number) => {
+        setCurrentPage(value);
+        dispatch(charactersRequest("", value));
+    };
+
+    // const currentPageItems = () => {
+    //     const lastItemIndex = currentPage * ITEMS_PER_PAGE;
+    //     const firstItemIndex = lastItemIndex - ITEMS_PER_PAGE;
+    //     return characters.slice(firstItemIndex, lastItemIndex);
+    // };
+
+    const pageNumbers = (): Array<number> => {
+        const pageNumbers = [];
+        for (let i = 1; i <= pages; i++) {
+            pageNumbers.push(i);
+        }
+        return pageNumbers;
+    };
+
     const renderList = (): JSX.Element[] => {
-        return characters.map((tile: Character) => {
+        return characters.map((character: Character, index: number) => {
             return (
-                <GridListTile key={tile.id}>
-                    <img src={tile.image} alt={tile.name} />
-                    <Link to={`/characters/${tile.id}`} className="header">
+                <GridListTile key={index}>
+                    <img src={character.image} alt={character.name} />
+                    <Link to={`/characters/${character.id}`} className="header">
                         <GridListTileBar
-                            title={tile.name}
+                            title={character.name}
                             subtitle={
                                 <span>
-                                    id: {tile.id} - created: {tile.created}
+                                    id: {character.id} - created:{" "}
+                                    {character.created}
                                 </span>
                             }
                         />
@@ -81,11 +104,16 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
                 </div>
                 <GridList
                     cellHeight={230}
-                    cols={4}
+                    cols={3}
                     className={classes.gridList}
                 >
                     {renderList()}
                 </GridList>
+                currentPage: {currentPage}
+                <Pager
+                    pageNumbers={pageNumbers()}
+                    pageSelected={(value: number) => onCurrentPageChange(value)}
+                ></Pager>
             </div>
         </div>
     );

@@ -17,7 +17,12 @@ export const characterStoreReducer: Reducer<CharacterStore, AnyAction> = (
         case GETTING_CHARACTER_BYID:
             return { ...state, loading: true };
         case GOT_CHARACTERS:
-            return { ...state, loading: false, characters: action.payload };
+            return {
+                ...state,
+                loading: false,
+                characters: action.payload.results,
+                pages: action.payload.info.pages
+            };
         case GOT_CHARACTER_BYID:
             return {
                 ...state,
