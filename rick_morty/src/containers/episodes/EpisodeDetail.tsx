@@ -55,7 +55,7 @@ const EpisodeDetail: FunctionComponent<RouteComponentProps<TParams>> = (
                     <h2>{selectedEpisode.name}</h2>
                     <div className="content">
                         <div className="description">
-                            Id: {selectedEpisode.id} - created{" "}
+                            Id: {selectedEpisode.id} - created:{" "}
                             {selectedEpisode.created}
                         </div>
                         <div className="description">

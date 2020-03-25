@@ -20,14 +20,15 @@ const SearchBar: FunctionComponent<SearchBarProps> = (
                 placeholder="Search"
                 value={props.searchTerm}
                 spellCheck={false}
+                onBlur={() => props.onSubmitSearch()}
                 onChange={e => props.onSearchValueChange(e.target.value)}
             />
-            <button
+            {/* <button
                 onClick={() => props.onSubmitSearch()}
                 className={classes.searchBarButton}
             >
                 Send
-            </button>
+            </button> */}
         </div>
     );
 };

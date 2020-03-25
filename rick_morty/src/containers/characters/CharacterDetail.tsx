@@ -9,6 +9,7 @@ import {
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import { styles } from "./CharacterStyles";
+import "./Character.css";
 
 type TParams = { id: string };
 
@@ -51,11 +52,11 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
     const renderContent = () => {
         if (selectedCharacter !== undefined) {
             return (
-                <div>
+                <div className="card-container border-gray rounded border mx-2 my-3 d-flex flex-column align-items-center p-0 bg-light">
                     <h2>{selectedCharacter.name}</h2>
                     <div className="content">
                         <div className="description">
-                            Id: {selectedCharacter.id} - created{" "}
+                            Id: {selectedCharacter.id} - created:{" "}
                             {selectedCharacter.created}
                         </div>
                         <div className="description">
@@ -73,7 +74,7 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
         }
         return <div>Character Not Found!</div>;
     };
-    return <div className={classes.root}>{renderContent()}</div>;
+    return <div className="col-sm-6 col-md-4 card">{renderContent()}</div>;
 };
 
 export default CharacterDetail;

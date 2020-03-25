@@ -14,6 +14,8 @@ import { Container } from "@material-ui/core";
 import CharacterDetail from "../characters/CharacterDetail";
 import EpisodesList from "../episodes/EpisodeList";
 import LocationsList from "../locations/LocationList";
+import EpisodeDetail from "../episodes/EpisodeDetail";
+import LocationDetail from "../locations/LocationDetail";
 
 // BrowserRouter is the router implementation for HTML5 browsers (vs Native).
 // Link is the replacement for anchor tags.
@@ -59,10 +61,18 @@ const App: FunctionComponent = () => {
                             exact
                             component={CharacterDetail}
                         />
+                        <Route
+                            path="/episodes/:id"
+                            exact
+                            component={EpisodeDetail}
+                        />
+                        <Route
+                            path="/locations/:id"
+                            exact
+                            component={LocationDetail}
+                        />
 
-                        {/* <Route path="/locations" exact render={() => <LocationsList resource="location" />} />
-                        <Route path="/episodes" exact render={() => <EpisodesList resource="episode" />} />
-                        <Route path="/episodes/:id" exact render={() => <EpisodeDetail resource="episode" id={1} />} /> */}
+                        {/* <Route path="/episodes/:id" exact render={() => <EpisodeDetail resource="episode" id={1} />} /> */}
                     </Switch>
                     <Footer copyright="❮❯ by Opinno 2020" />
                 </BrowserRouter>
