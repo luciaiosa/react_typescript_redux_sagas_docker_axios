@@ -32,17 +32,17 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
         },
         {
             key: "CharacterList",
-            label: "Character List",
+            label: "Characters List",
             link: null
         }
     ];
     useEffect(() => {
-        dispatch(charactersRequest("", 1));
+        dispatch(charactersRequest(currentPage));
         dispatch(setBreadcrumbs(breadCrumbs));
     }, []);
 
     const onSearchBarTerm = () => {
-        dispatch(charactersRequest(searchTerm, 1));
+        dispatch(charactersRequest(currentPage, searchTerm));
     };
 
     const onSearchBarValueChange = (value: string) => {
@@ -51,7 +51,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
 
     const onCurrentPageChange = (value: number) => {
         setCurrentPage(value);
-        dispatch(charactersRequest("", value));
+        dispatch(charactersRequest(value, searchTerm));
     };
 
     // const currentPageItems = () => {
@@ -104,7 +104,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
                 </div>
                 <GridList
                     cellHeight={230}
-                    cols={3}
+                    cols={4}
                     className={classes.gridList}
                 >
                     {renderList()}

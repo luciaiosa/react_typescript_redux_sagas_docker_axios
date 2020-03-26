@@ -18,7 +18,7 @@ const CarouselIndicator: FunctionComponent<CarouselIndicatorProps> = (
                         : "carousel__indicator"
                 }
                 onClick={() => props.onIndicatorSelected(props.index)}
-            />
+            ></a>
         </li>
     );
 };

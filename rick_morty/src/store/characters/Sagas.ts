@@ -7,19 +7,14 @@ import api from "../../apis/rick_morty";
 import { Character } from "./CharacterStore";
 import { setLoading } from "../app";
 
-const charactersFetch = async (searchTerm?: string, currentPage?: number) => {
+const charactersFetch = async (currentPage: number, searchTerm?: string) => {
     let response = { data: {} };
 
-    if (currentPage === 1) {
-        const filter = searchTerm === "" ? {} : { name: searchTerm };
-        response = await api.get<Character[]>(`/character/`, {
-            params: filter
-        });
-    } else {
-        response = await api.get<Character[]>(
-            `/character/?page=${currentPage}`
-        );
-    }
+    const filter = searchTerm === "" ? {} : { name: searchTerm };
+    response = await api.get<Character[]>(`/character/?page=${currentPage}`, {
+        params: filter
+    });
+
     return response.data;
 };
 
@@ -32,7 +27,7 @@ export function* apiCharacters(action: any) {
     //Use axios interceptor to set loading status
     yield put(setLoading(true));
     const response = yield call(() =>
-        charactersFetch(action.payload.searchTerm, action.payload.currentPage)
+        charactersFetch(action.payload.currentPage, action.payload.searchTerm)
     );
     yield put(charactersRequestSuccess(response));
     yield put(setLoading(false));

@@ -19,6 +19,13 @@ export const styles = makeStyles((theme: Theme) =>
             overflow: "hidden",
             flexDirection: "column"
         },
+        content: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "40px"
+        },
         description: {
             fontSize: "1.3rem",
             marginTop: 10,

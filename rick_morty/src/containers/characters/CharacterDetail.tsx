@@ -32,7 +32,7 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
             },
             {
                 key: "CharacterList",
-                label: "Character List",
+                label: "Characters List",
                 link: "/characters"
             },
             {

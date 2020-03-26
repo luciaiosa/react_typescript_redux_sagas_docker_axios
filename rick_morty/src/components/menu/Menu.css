@@ -1,16 +1,17 @@
-.link {
+.link-menu {
     text-decoration: none;
-    font-weight: 800;
+    font-weight: 400;
+    font-size: x-large;
     color: #424548;
     margin-right: 20px;
     align-self: center;
+    padding-left: 10px;
 }
-.link:hover {
-    color: #1da2b3;
+.link-menu:hover {
+    color: white;
 }
 .links-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: large;
 }

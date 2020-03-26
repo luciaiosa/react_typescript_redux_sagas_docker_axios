@@ -3,6 +3,8 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import CarouselIndicator from "./CarouselIndicator";
 import CarouselSlide from "./CarouselSlide";
 import "./Carousel.css";
+import { clearTimeout } from "timers";
+import { Slider } from "@material-ui/core";
 
 export interface Slide {
     image: {
@@ -16,6 +18,7 @@ export interface Slide {
 
 interface CarouselProps {
     slides: Slide[];
+    timer: number;
 }
 
 const Carousel: FunctionComponent<CarouselProps> = (
@@ -53,10 +56,16 @@ const Carousel: FunctionComponent<CarouselProps> = (
         setCurrentSlideIndex(index);
     };
 
+    // useEffect(() => {
+    //     const nextSlide = (currentSlideIndex + 1) % props.slides.length;
+    //     let id = setTimeout(() => goToSlide(nextSlide), props.timer);
+    //     return () => clearTimeout(id);
+    // }, [currentSlideIndex]);
+
     const renderSlides = (): JSX.Element[] => {
         return props.slides.map((slide: Slide, index: number) => {
             return (
-                <div>
+                <div key={slide.title}>
                     <CarouselSlide
                         slide={slide}
                         index={index}
@@ -70,7 +79,7 @@ const Carousel: FunctionComponent<CarouselProps> = (
     const renderIndicators = (): JSX.Element[] => {
         return props.slides.map((slide: Slide, index: number) => {
             return (
-                <div>
+                <div key={index}>
                     <CarouselIndicator
                         index={index}
                         activeIndex={currentSlideIndex}

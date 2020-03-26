@@ -14,6 +14,7 @@ const useStyles = makeStyles(() =>
             display: "inline"
         },
         breadcrumbSpan: {
+            // color: "#424548"
             color: "#808080"
         }
     })

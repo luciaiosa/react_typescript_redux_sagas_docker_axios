@@ -1,28 +1,30 @@
-import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
-import Menu from '../menu/Menu';
+import React, { FunctionComponent } from "react";
+import styled from "styled-components";
+import Menu from "../menu/Menu";
 
 const FooterContainer = styled.div`
     display: flex;
     justify-content: center;
     align-self: center;
-    padding-top: 20px;
+    padding-top: 25px;
     padding-bottom: 20px;
     flex-direction: column;
     background-color: rgb(32, 35, 41);
     color: rgb(158, 158, 158);
-`
+    height: 100px;
+    margin-bottom: 5px;
+`;
 const FooterContent = styled.span`
     align-self: center;
     padding-top: 10px;
-    padding-bottom: 10px;
-`
+`;
 
 interface FooterProps {
-    copyright: string
-
+    copyright: string;
 }
-const Footer: FunctionComponent<FooterProps> = (props: FooterProps): JSX.Element => {
+const Footer: FunctionComponent<FooterProps> = (
+    props: FooterProps
+): JSX.Element => {
     return (
         <FooterContainer>
             <Menu></Menu>

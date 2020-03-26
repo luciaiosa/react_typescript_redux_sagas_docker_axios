@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import CustomBreadcrumbs from "../../components/breadcrumbs/Breadcrumbs";
-import "./App.css";
 import CharactersList from "../characters/CharacterList";
 import { useSelector } from "react-redux";
 import { AppStore } from "../../store/app/AppStore";
@@ -27,13 +26,14 @@ const App: FunctionComponent = () => {
         state => state
     );
     return (
-        <Container>
-            <div style={{ minHeight: "100vh" }}>
-                {loading ? <Spinner message={literals.loadingMessage} /> : null}
-                <BrowserRouter>
+        <div style={{ minHeight: "100vh" }}>
+            {loading ? <Spinner message={literals.loadingMessage} /> : null}
+            <BrowserRouter>
+                <Container maxWidth="lg">
                     <Header>
                         <CustomBreadcrumbs items={breadcrumbs} />
                     </Header>
+
                     {/* Switch mira todas las rutas, y solo va a mostrar la primera ruta que encuentra que coincide con el path */}
                     <Switch>
                         {/* <Route path="/characters" exact component={CharactersList} />
@@ -74,10 +74,10 @@ const App: FunctionComponent = () => {
 
                         {/* <Route path="/episodes/:id" exact render={() => <EpisodeDetail resource="episode" id={1} />} /> */}
                     </Switch>
-                    <Footer copyright="❮❯ by Opinno 2020" />
-                </BrowserRouter>
-            </div>
-        </Container>
+                </Container>
+                <Footer copyright="❮❯ by Opinno 2020" />
+            </BrowserRouter>
+        </div>
     );
 };
 
