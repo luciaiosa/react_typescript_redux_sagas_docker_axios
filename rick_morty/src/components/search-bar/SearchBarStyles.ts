@@ -8,10 +8,7 @@ export const styles = makeStyles(() =>
             height: 50,
             borderRadius: 5,
             flexDirection: "row",
-            marginTop: 10,
-            marginBottom: 20,
-            width: "50%",
-            alignSelf: "flex-end"
+            width: "50%"
         },
         searchBarInput: {
             flex: 1,

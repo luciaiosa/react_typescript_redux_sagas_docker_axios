@@ -22,7 +22,12 @@ export const styles = makeStyles((theme: Theme) =>
         pageHeader: {
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center"
+            alignItems: "center",
+            height: "90px"
+        },
+        pageHeaderTitle: {
+            margin: 0,
+            paddingLeft: "20px"
         }
     })
 );

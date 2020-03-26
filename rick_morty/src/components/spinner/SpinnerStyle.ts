@@ -54,7 +54,22 @@ export const spinnerStyles = makeStyles(() =>
             left: "50%",
             margin: 0,
             zIndex: 1000,
-            transform: "translateX(-50%) translateY(-50%)"
+            transform: "translateX(-50%) translateY(-50%)",
+            "&::before": {
+                borderColor: "rgba(255, 255, 255, 0.15)",
+                width: "2.28571429rem",
+                height: "2.28571429rem",
+                margin: "0 0 0 -1.14285714rem",
+                position: "absolute",
+                content: "",
+                top: 0,
+                left: "50%",
+                // width: "100%",
+                // height: "100%",
+                borderRadius: "500rem",
+                border: "0.2em solid rgba(0, 0, 0, 0.1)",
+                boxSizing: "inherit"
+            }
         }
     })
 );

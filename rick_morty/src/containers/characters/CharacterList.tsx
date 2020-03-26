@@ -93,7 +93,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
         <div className={classes.root}>
             <div className={classes.container}>
                 <div className={classes.pageHeader}>
-                    <h2>Characters list</h2>
+                    <h2 className={classes.pageHeaderTitle}>Characters list</h2>
                     <SearchBar
                         searchTerm={searchTerm}
                         onSearchValueChange={value =>
@@ -109,9 +109,9 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
                 >
                     {renderList()}
                 </GridList>
-                currentPage: {currentPage}
                 <Pager
                     pageNumbers={pageNumbers()}
+                    currentPage={currentPage}
                     pageSelected={(value: number) => onCurrentPageChange(value)}
                 ></Pager>
             </div>
