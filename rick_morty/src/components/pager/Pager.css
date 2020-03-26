@@ -22,6 +22,9 @@
     transition: background-color 0.3s;
     border: 1px solid #ddd;
 }
+.pagination:nth-last-child(-n + 5) {
+    content: icon;
+}
 .pagination li.active {
     background-color: #ff01c1;
     color: white;
