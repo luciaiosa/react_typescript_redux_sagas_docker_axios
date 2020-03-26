@@ -10,6 +10,7 @@ import charactersImage from "../../assets/characters.jpeg";
 import episodesImage from "../../assets/episodes.jpeg";
 import locationsImage from "../../assets/location.jpeg";
 import { styles } from "./HomeStyles";
+import Carousel from "../../components/carousel/Carousel";
 
 // BrowserRouter is the router implementation for HTML5 browsers (vs Native).
 // Link is the replacement for anchor tags.
@@ -22,6 +23,36 @@ const Home: FunctionComponent = () => {
     useEffect(() => {
         dispatch(setBreadcrumbs([]));
     }, [dispatch]);
+
+    const slides = [
+        {
+            image: {
+                source: charactersImage,
+                alt: "characters"
+            },
+            linkUrl: "/characters",
+            title: "Go to Characters list",
+            subtitle: "See our characters list!"
+        },
+        {
+            image: {
+                source: episodesImage,
+                alt: "episodes"
+            },
+            linkUrl: "/episodes",
+            title: "Go to Episodes list",
+            subtitle: "See our episodes list!"
+        },
+        {
+            image: {
+                source: locationsImage,
+                alt: "locations"
+            },
+            linkUrl: "/locations",
+            title: "Go to locations list",
+            subtitle: "See our locations list!"
+        }
+    ];
     return (
         <div className={classes.root}>
             <div className={classes.container}>
@@ -36,11 +67,12 @@ const Home: FunctionComponent = () => {
                     canonical information as seen on the TV show. <br />
                     Season 4 characters, locations and episodes are coming soon!
                 </p>
+                <Carousel slides={slides}></Carousel>
 
-                <GridList
+                {/* <GridList
                     cellHeight={280}
                     cols={2}
-                    spacing={10}
+                    spacing={15}
                     className={classes.gridList}
                 >
                     <GridListTile>
@@ -70,7 +102,7 @@ const Home: FunctionComponent = () => {
                             />
                         </Link>
                     </GridListTile>
-                </GridList>
+                </GridList> */}
             </div>
         </div>
     );
