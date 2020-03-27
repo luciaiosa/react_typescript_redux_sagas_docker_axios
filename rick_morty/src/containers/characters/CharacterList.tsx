@@ -12,7 +12,7 @@ import {
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import SearchBar from "../../components/search-bar/SearchBar";
-import { styles } from "./CharacterStyles";
+import { styles } from "../../styles/ListsStyles";
 import Pager from "../../components/pager/Pager";
 
 const CharactersList: FunctionComponent = (): JSX.Element => {
@@ -54,12 +54,6 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
         dispatch(charactersRequest(value, searchTerm));
     };
 
-    // const currentPageItems = () => {
-    //     const lastItemIndex = currentPage * ITEMS_PER_PAGE;
-    //     const firstItemIndex = lastItemIndex - ITEMS_PER_PAGE;
-    //     return characters.slice(firstItemIndex, lastItemIndex);
-    // };
-
     const pageNumbers = (): Array<number> => {
         const pageNumbers = [];
         for (let i = 1; i <= pages; i++) {
@@ -89,6 +83,19 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
         });
     };
 
+    const renderPagination = (): JSX.Element => {
+        if (pages > 1) {
+            return (
+                <Pager
+                    pageNumbers={pageNumbers()}
+                    currentPage={currentPage}
+                    pageSelected={(value: number) => onCurrentPageChange(value)}
+                ></Pager>
+            );
+        }
+        return <div></div>;
+    };
+
     return (
         <div className={classes.root}>
             <div className={classes.container}>
@@ -109,11 +116,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
                 >
                     {renderList()}
                 </GridList>
-                <Pager
-                    pageNumbers={pageNumbers()}
-                    currentPage={currentPage}
-                    pageSelected={(value: number) => onCurrentPageChange(value)}
-                ></Pager>
+                {renderPagination()}
             </div>
         </div>
     );

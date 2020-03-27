@@ -15,6 +15,7 @@ import EpisodesList from "../episodes/EpisodeList";
 import LocationsList from "../locations/LocationList";
 import EpisodeDetail from "../episodes/EpisodeDetail";
 import LocationDetail from "../locations/LocationDetail";
+import ErrorPage from "../errorPage/ErrorPage";
 
 // BrowserRouter is the router implementation for HTML5 browsers (vs Native).
 // Link is the replacement for anchor tags.
@@ -71,11 +72,12 @@ const App: FunctionComponent = () => {
                             exact
                             component={LocationDetail}
                         />
+                        <Route path="/404" exact component={ErrorPage} />
 
                         {/* <Route path="/episodes/:id" exact render={() => <EpisodeDetail resource="episode" id={1} />} /> */}
                     </Switch>
+                    <Footer copyright="❮❯ by Opinno 2020" />
                 </Container>
-                <Footer copyright="❮❯ by Opinno 2020" />
             </BrowserRouter>
         </div>
     );

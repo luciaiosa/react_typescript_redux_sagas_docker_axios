@@ -4,11 +4,17 @@ import api from "../../apis/rick_morty";
 import { Location } from "./LocationStore";
 import { setLoading } from "../app";
 
-const locationsFetch = async (searchTerm?: string) => {
-    const filter = searchTerm === undefined ? {} : { name: searchTerm };
-    const response = await api.get<Location[]>(`/location/`, {
-        params: filter
-    });
+const locationsFetch = async (currentPage: number, searchTerm?: string) => {
+    const filter =
+        searchTerm === "" || searchTerm === undefined
+            ? {}
+            : { name: searchTerm };
+    const response = await api.get<Location[]>(
+        `/location/?page=${currentPage}`,
+        {
+            params: filter
+        }
+    );
     return response.data;
 };
 
@@ -20,7 +26,9 @@ const locationByIdFetch = async (id: number) => {
 export function* apiLocations(action: any) {
     //Use axios interceptor to set loading status
     yield put(setLoading(true));
-    const locations = yield call(() => locationsFetch(action.payload));
+    const locations = yield call(() =>
+        locationsFetch(action.payload.currentPage, action.payload.searchTerm)
+    );
     yield put(locationsRequestSuccess(locations.results));
     yield put(setLoading(false));
 }

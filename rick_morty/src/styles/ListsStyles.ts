@@ -9,10 +9,14 @@ export const styles = makeStyles((theme: Theme) =>
             overflow: "hidden",
             backgroundColor: theme.palette.background.paper,
             flexDirection: "column",
-            minHeight: 500
+            minHeight: "75vh"
         },
         container: {
             display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignContent: "center",
+            overflow: "hidden",
             flexDirection: "column"
         },
         gridList: {
@@ -22,7 +26,12 @@ export const styles = makeStyles((theme: Theme) =>
         pageHeader: {
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center"
+            alignItems: "center",
+            height: "90px"
+        },
+        pageHeaderTitle: {
+            margin: 0,
+            paddingLeft: "20px"
         }
     })
 );

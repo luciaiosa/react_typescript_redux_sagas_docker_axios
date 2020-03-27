@@ -1,10 +1,8 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import CarouselIndicator from "./CarouselIndicator";
 import CarouselSlide from "./CarouselSlide";
 import "./Carousel.css";
-import { clearTimeout } from "timers";
-import { Slider } from "@material-ui/core";
 
 export interface Slide {
     image: {
@@ -18,7 +16,6 @@ export interface Slide {
 
 interface CarouselProps {
     slides: Slide[];
-    timer: number;
 }
 
 const Carousel: FunctionComponent<CarouselProps> = (

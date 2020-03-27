@@ -1,11 +1,10 @@
 import React, { FunctionComponent, useEffect } from "react";
-import "./Home.css";
 import { useDispatch } from "react-redux";
 import { setBreadcrumbs } from "../../store/app";
 import charactersImage from "../../assets/characters.jpeg";
 import episodesImage from "../../assets/episodes.jpeg";
 import locationsImage from "../../assets/location.jpeg";
-import { styles } from "./HomeStyles";
+import { styles } from "../../styles/DescriptionStyles";
 import Carousel from "../../components/carousel/Carousel";
 
 // BrowserRouter is the router implementation for HTML5 browsers (vs Native).
@@ -66,42 +65,7 @@ const Home: FunctionComponent = () => {
                         soon!
                     </p>
                 </div>
-                <Carousel slides={slides} timer={5000}></Carousel>
-
-                {/* <GridList
-                    cellHeight={280}
-                    cols={2}
-                    spacing={15}
-                    className={classes.gridList}
-                >
-                    <GridListTile>
-                        <img src={charactersImage} alt="characters" />
-                        <Link to={`/characters`} className="header">
-                            <GridListTileBar
-                                title="Go to Characters list"
-                                subtitle="See our characters list!"
-                            />
-                        </Link>
-                    </GridListTile>
-                    <GridListTile>
-                        <img src={episodesImage} alt="episodes" />
-                        <Link to={`/episodes`} className="header">
-                            <GridListTileBar
-                                title="Go to Episodes list"
-                                subtitle="See our episodes list!"
-                            />
-                        </Link>
-                    </GridListTile>
-                    <GridListTile>
-                        <img src={locationsImage} alt="locations" />
-                        <Link to={`/locations`} className="header">
-                            <GridListTileBar
-                                title="Go to Locations list"
-                                subtitle="See our locations list!"
-                            />
-                        </Link>
-                    </GridListTile>
-                </GridList> */}
+                <Carousel slides={slides}></Carousel>
             </div>
         </div>
     );

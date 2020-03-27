@@ -9,14 +9,14 @@ export interface Character {
     created: string;
 }
 
-export const InitialCharacterStore: CharacterStore = {
-    pages: 1,
-    characters: [],
-    selectedCharacter: undefined
-};
-
 export interface CharacterStore {
     readonly pages: number;
     readonly characters: Character[];
     readonly selectedCharacter: Character | undefined;
 }
+
+export const InitialCharacterStore: CharacterStore = {
+    pages: 1,
+    characters: [],
+    selectedCharacter: undefined
+};

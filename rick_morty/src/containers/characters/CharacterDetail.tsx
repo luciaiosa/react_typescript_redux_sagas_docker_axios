@@ -8,8 +8,7 @@ import {
 } from "../../store/characters";
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
-import { styles } from "./CharacterStyles";
-import "./Character.css";
+import { styles } from "../../styles/DescriptionStyles";
 
 type TParams = { id: string };
 
@@ -18,6 +17,7 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
 ): JSX.Element => {
     const classes = styles();
     const dispatch = useDispatch();
+
     const { selectedCharacter } = useSelector<AppStore, CharacterStore>(
         state => state.characterStore
     );
@@ -52,21 +52,41 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
     const renderContent = () => {
         if (selectedCharacter !== undefined) {
             return (
-                <div className="card-container border-gray rounded border mx-2 my-3 d-flex flex-column align-items-center p-0 bg-light">
-                    <h2>{selectedCharacter.name}</h2>
-                    <div className="content">
-                        <div className="description">
-                            Id: {selectedCharacter.id} - created:{" "}
-                            {selectedCharacter.created}
-                        </div>
-                        <div className="description">
-                            Status: {selectedCharacter.status}
-                        </div>
-                        <div className="description">
-                            Species: {selectedCharacter.species}
-                        </div>
-                        <div className="description">
-                            Gender: {selectedCharacter.gender}
+                <div className={classes.root}>
+                    <div className={classes.container}>
+                        <div className={classes.content}>
+                            <h2>{selectedCharacter.name}</h2>
+                            <div>
+                                <div className={classes.descriptionRow}>
+                                    <img
+                                        width={600}
+                                        height={400}
+                                        src={selectedCharacter.image}
+                                        alt="character"
+                                    />
+                                </div>
+                                <div className={classes.descriptionRow}>
+                                    <p className={classes.description}>
+                                        Id: {selectedCharacter.id} - created:{" "}
+                                        {selectedCharacter.created}
+                                    </p>
+                                </div>
+                                <div className={classes.descriptionRow}>
+                                    <p className={classes.description}>
+                                        Status: {selectedCharacter.status}
+                                    </p>
+                                </div>
+                                <div className={classes.descriptionRow}>
+                                    <p className={classes.description}>
+                                        Species: {selectedCharacter.species}
+                                    </p>
+                                </div>
+                                <div className={classes.descriptionRow}>
+                                    <p className={classes.description}>
+                                        Gender: {selectedCharacter.gender}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -74,7 +94,7 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
         }
         return <div>Character Not Found!</div>;
     };
-    return <div className="col-sm-6 col-md-4 card">{renderContent()}</div>;
+    return <div className={classes.root}>{renderContent()}</div>;
 };
 
 export default CharacterDetail;

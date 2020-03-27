@@ -8,13 +8,16 @@ import { episodesRequest, EpisodeStore, Episode } from "../../store/episodes";
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import SearchBar from "../../components/search-bar/SearchBar";
+import { styles } from "../../styles/ListsStyles";
+import Pager from "../../components/pager/Pager";
 import image from "../../assets/episodes.jpeg";
-import { styles } from "./EpisodeStyles";
 
 const EpisodesList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const { episodes } = useSelector<AppStore, EpisodeStore>(
+    const [currentPage, setCurrentPage] = useState<number>(1);
+
+    const { episodes, pages } = useSelector<AppStore, EpisodeStore>(
         state => state.episodeStore
     );
     const dispatch = useDispatch();
@@ -31,29 +34,43 @@ const EpisodesList: FunctionComponent = (): JSX.Element => {
         }
     ];
     useEffect(() => {
-        dispatch(episodesRequest());
+        dispatch(episodesRequest(currentPage));
         dispatch(setBreadcrumbs(breadCrumbs));
     }, []);
 
     const onSearchBarTerm = () => {
-        dispatch(episodesRequest(searchTerm));
+        dispatch(episodesRequest(currentPage, searchTerm));
     };
 
     const onSearchBarValueChange = (value: string) => {
         setSearchTerm(value);
     };
 
+    const onCurrentPageChange = (value: number) => {
+        setCurrentPage(value);
+        dispatch(episodesRequest(value, searchTerm));
+    };
+
+    const pageNumbers = (): Array<number> => {
+        const pageNumbers = [];
+        for (let i = 1; i <= pages; i++) {
+            pageNumbers.push(i);
+        }
+        return pageNumbers;
+    };
+
     const renderList = (): JSX.Element[] => {
-        return episodes.map((tile: Episode) => {
+        return episodes.map((episode: Episode, index: number) => {
             return (
-                <GridListTile key={tile.episode}>
-                    <img src={image} alt={tile.name} />
-                    <Link to={`/episode/${tile.id}`} className="header">
+                <GridListTile key={index}>
+                    <img src={image} alt={episode.name} />
+                    <Link to={`/episodes/${episode.id}`} className="header">
                         <GridListTileBar
-                            title={tile.name}
+                            title={episode.name}
                             subtitle={
                                 <span>
-                                    id: {tile.id} - created: {tile.created}
+                                    id: {episode.id} - created:{" "}
+                                    {episode.created}
                                 </span>
                             }
                         />
@@ -63,11 +80,24 @@ const EpisodesList: FunctionComponent = (): JSX.Element => {
         });
     };
 
+    const renderPagination = (): JSX.Element => {
+        if (pages > 1) {
+            return (
+                <Pager
+                    pageNumbers={pageNumbers()}
+                    currentPage={currentPage}
+                    pageSelected={(value: number) => onCurrentPageChange(value)}
+                ></Pager>
+            );
+        }
+        return <div></div>;
+    };
+
     return (
         <div className={classes.root}>
             <div className={classes.container}>
                 <div className={classes.pageHeader}>
-                    <h2>Episodes list</h2>
+                    <h2 className={classes.pageHeaderTitle}>Episodes list</h2>
                     <SearchBar
                         searchTerm={searchTerm}
                         onSearchValueChange={value =>
@@ -83,6 +113,7 @@ const EpisodesList: FunctionComponent = (): JSX.Element => {
                 >
                     {renderList()}
                 </GridList>
+                {renderPagination()}
             </div>
         </div>
     );

@@ -1,9 +1,5 @@
 import React, { FunctionComponent } from "react";
-import {
-    GridListTile,
-    GridListTileBar,
-    CardActionArea
-} from "@material-ui/core";
+import { GridListTileBar, CardActionArea } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Slide } from "./Carousel";
 
@@ -20,7 +16,7 @@ const CarouselSlide: FunctionComponent<CarouselSlideProps> = (
         <li
             key={props.index}
             className={
-                props.index == props.activeIndex
+                props.index === props.activeIndex
                     ? "carousel__slide carousel__slide--active"
                     : "carousel__slide"
             }

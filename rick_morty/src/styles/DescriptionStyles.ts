@@ -13,21 +13,26 @@ export const styles = makeStyles((theme: Theme) =>
         },
         container: {
             display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignContent: "center",
+            overflow: "hidden",
             flexDirection: "column"
         },
-        gridList: {
-            width: "100%",
-            height: "auto"
-        },
-        pageHeader: {
+        content: {
             display: "flex",
-            justifyContent: "space-between",
+            flexDirection: "column",
+            justifyContent: "center",
             alignItems: "center",
-            height: "90px"
+            padding: "40px"
         },
-        pageHeaderTitle: {
-            margin: 0,
-            paddingLeft: "20px"
+        description: {
+            fontSize: "1.3rem",
+            marginTop: 10,
+            marginBottom: 30
+        },
+        descriptionRow: {
+            paddingTop: 10
         }
     })
 );

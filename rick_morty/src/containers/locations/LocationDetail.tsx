@@ -8,7 +8,8 @@ import {
 } from "../../store/locations";
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
-import { styles } from "./LocationStyles";
+import { styles } from "../../styles/DescriptionStyles";
+import image from "../../assets/location.jpeg";
 
 type TParams = { id: string };
 
@@ -17,6 +18,7 @@ const LocationDetail: FunctionComponent<RouteComponentProps<TParams>> = (
 ): JSX.Element => {
     const classes = styles();
     const dispatch = useDispatch();
+
     const { selectedLocation } = useSelector<AppStore, LocationStore>(
         state => state.locationStore
     );
@@ -51,21 +53,41 @@ const LocationDetail: FunctionComponent<RouteComponentProps<TParams>> = (
     const renderContent = () => {
         if (selectedLocation !== undefined) {
             return (
-                <div>
-                    <h2>{selectedLocation.name}</h2>
-                    <div className="content">
-                        <div className="description">
-                            Id: {selectedLocation.id} - created{" "}
-                            {selectedLocation.created}
-                        </div>
-                        <div className="description">
-                            Type: {selectedLocation.type}
-                        </div>
-                        <div className="description">
-                            Dimension: {selectedLocation.dimension}
-                        </div>
-                        <div className="description">
-                            Url: {selectedLocation.url}
+                <div className={classes.root}>
+                    <div className={classes.container}>
+                        <div className={classes.content}>
+                            <h2>{selectedLocation.name}</h2>
+                            <div>
+                                <div className={classes.descriptionRow}>
+                                    <img
+                                        width={600}
+                                        height={400}
+                                        src={image}
+                                        alt="location"
+                                    />
+                                </div>
+                                <div className={classes.descriptionRow}>
+                                    <p className={classes.description}>
+                                        Id: {selectedLocation.id} - created:{" "}
+                                        {selectedLocation.created}
+                                    </p>
+                                </div>
+                                <div className={classes.descriptionRow}>
+                                    <p className={classes.description}>
+                                        Type: {selectedLocation.type}
+                                    </p>
+                                </div>
+                                <div className={classes.descriptionRow}>
+                                    <p className={classes.description}>
+                                        Dimension: {selectedLocation.dimension}
+                                    </p>
+                                </div>
+                                <div className={classes.descriptionRow}>
+                                    <p className={classes.description}>
+                                        Url: {selectedLocation.url}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

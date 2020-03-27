@@ -8,11 +8,13 @@ export interface Episode {
 }
 
 export interface EpisodeStore {
+    readonly pages: number;
     readonly episodes: Episode[];
     readonly selectedEpisode: Episode | undefined;
 }
 
 export const InitialEpisodeStore: EpisodeStore = {
+    pages: 1,
     episodes: [],
     selectedEpisode: undefined
 };

@@ -4,9 +4,9 @@ export const GETTING_EPISODE_BYID = "GETTING_EPISODE_BYID";
 export const GOT_EPISODE_BYID = "GOT_EPISODE_BYID";
 export const CLEAR_EPISODE_SELECTED = "CLEAR_EPISODE_SELECTED";
 
-export const episodesRequest = (searchTerm?: string) => ({
+export const episodesRequest = (currentPage: number, searchTerm?: string) => ({
     type: GETTING_EPISODES,
-    payload: searchTerm
+    payload: { currentPage, searchTerm }
 });
 
 export const episodesRequestSuccess = (payload: any) => ({

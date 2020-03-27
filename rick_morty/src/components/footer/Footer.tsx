@@ -12,7 +12,8 @@ const FooterContainer = styled.div`
     background-color: rgb(32, 35, 41);
     color: rgb(158, 158, 158);
     height: 100px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-top: 20px;
 `;
 const FooterContent = styled.span`
     align-self: center;

@@ -4,9 +4,9 @@ export const GETTING_LOCATION_BYID = "GETTING_LOCATION_BYID";
 export const GOT_LOCATION_BYID = "GOT_LOCATION_BYID";
 export const CLEAR_LOCATION_SELECTED = "CLEAR_LOCATION_SELECTED";
 
-export const locationsRequest = (searchTerm?: string) => ({
+export const locationsRequest = (currentPage: number, searchTerm?: string) => ({
     type: GETTING_LOCATIONS,
-    payload: searchTerm
+    payload: { currentPage, searchTerm }
 });
 
 export const locationsRequestSuccess = (payload: any) => ({

@@ -8,12 +8,16 @@ import { Character } from "./CharacterStore";
 import { setLoading } from "../app";
 
 const charactersFetch = async (currentPage: number, searchTerm?: string) => {
-    let response = { data: {} };
-
-    const filter = searchTerm === "" ? {} : { name: searchTerm };
-    response = await api.get<Character[]>(`/character/?page=${currentPage}`, {
-        params: filter
-    });
+    const filter =
+        searchTerm === "" || searchTerm === undefined
+            ? {}
+            : { name: searchTerm };
+    const response = await api.get<Character[]>(
+        `/character/?page=${currentPage}`,
+        {
+            params: filter
+        }
+    );
 
     return response.data;
 };
