@@ -7,7 +7,6 @@ const logo = require("../../assets/logo1.png");
 
 const LinksContainer = styled.div`
     margin-top: 30px;
-    width: 100%;
     background-color: #ff01c1;
     padding-top: 15px;
     padding-left: 20px;

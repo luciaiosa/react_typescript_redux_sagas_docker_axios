@@ -13,10 +13,12 @@ export interface CharacterStore {
     readonly pages: number;
     readonly characters: Character[];
     readonly selectedCharacter: Character | undefined;
+    readonly selectedCharactersToCompare: Character[];
 }
 
 export const InitialCharacterStore: CharacterStore = {
     pages: 1,
     characters: [],
-    selectedCharacter: undefined
+    selectedCharacter: undefined,
+    selectedCharactersToCompare: []
 };

@@ -3,10 +3,16 @@ import {
     GOT_CHARACTERS,
     GETTING_CHARACTER_BYID,
     GOT_CHARACTER_BYID,
-    CLEAR_CHARACTER_SELECTED
+    CLEAR_CHARACTER_SELECTED,
+    GOT_CHARACTER_BYID_TO_COMPARE,
+    REMOVE_CHARACTER_TO_COMPARE
 } from "./Actions";
 import { Reducer, AnyAction } from "redux";
-import { InitialCharacterStore, CharacterStore } from "./CharacterStore";
+import {
+    InitialCharacterStore,
+    CharacterStore,
+    Character
+} from "./CharacterStore";
 
 export const characterStoreReducer: Reducer<CharacterStore, AnyAction> = (
     state = InitialCharacterStore,
@@ -28,6 +34,25 @@ export const characterStoreReducer: Reducer<CharacterStore, AnyAction> = (
                 ...state,
                 loading: false,
                 selectedCharacter: action.payload
+            };
+        case GOT_CHARACTER_BYID_TO_COMPARE:
+            return {
+                ...state,
+                loading: false,
+                selectedCharactersToCompare: [
+                    ...state.selectedCharactersToCompare,
+                    action.payload
+                ]
+            };
+        case REMOVE_CHARACTER_TO_COMPARE:
+            return {
+                ...state,
+                selectedCharactersToCompare: [
+                    ...state.selectedCharactersToCompare.filter(
+                        (character: Character) =>
+                            character.id !== action.payload
+                    )
+                ]
             };
         case CLEAR_CHARACTER_SELECTED:
             return { ...state, selectedCharacter: undefined };

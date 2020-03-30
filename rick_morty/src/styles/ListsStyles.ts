@@ -14,10 +14,11 @@ export const styles = makeStyles((theme: Theme) =>
         container: {
             display: "flex",
             flexWrap: "wrap",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             alignContent: "center",
             overflow: "hidden",
-            flexDirection: "column"
+            flexDirection: "column",
+            minHeight: "75vh"
         },
         gridList: {
             width: "100%",
@@ -27,11 +28,57 @@ export const styles = makeStyles((theme: Theme) =>
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            height: "90px"
+            height: 90,
+            width: "100%"
         },
         pageHeaderTitle: {
             margin: 0,
-            paddingLeft: "20px"
+            paddingLeft: 20
+        },
+        description: {
+            fontSize: "1.3rem",
+            marginTop: 10,
+            marginBottom: 30
+        },
+        descriptionRow: {
+            paddingTop: 10,
+            display: "flex",
+            justifyContent: "space-between"
+        },
+        listTileContainer: {
+            paddingLeft: 25,
+            paddingRight: 10
+        },
+        message: {
+            height: 70,
+            fontSize: 18,
+            lineHeight: "1.4285em",
+            margin: 5,
+            paddingLeft: 15,
+            marginTop: 15,
+            marginBottom: 15
+        },
+        errorMessage: {
+            color: "red",
+            height: 50,
+            fontSize: 18,
+            lineHeight: "1.4285em",
+            margin: 5,
+            paddingLeft: 15,
+            marginTop: 15,
+            marginBottom: 20
+        },
+        blankDiv: {
+            height: 50
+        },
+        pageCompareCharacters: {
+            paddingLeft: 20,
+            paddingRight: 20,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: 90,
+            width: "100%"
         }
     })
 );

@@ -109,6 +109,15 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
                         onSubmitSearch={() => onSearchBarTerm()}
                     />
                 </div>
+                <div className={classes.message}>
+                    <h3>
+                        You can compare any of these characters between
+                        them,following the link below.
+                    </h3>
+                    <Link to={`/compare-characters`} className="header">
+                        <h3>Compare characters</h3>
+                    </Link>
+                </div>
                 <GridList
                     cellHeight={230}
                     cols={4}

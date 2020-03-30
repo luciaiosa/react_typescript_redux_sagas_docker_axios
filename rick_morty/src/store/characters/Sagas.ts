@@ -1,7 +1,8 @@
 import { call, put } from "redux-saga/effects";
 import {
     charactersRequestSuccess,
-    characterByIdRequestSuccess
+    characterByIdRequestSuccess,
+    characterByIdRequestToCompareSuccess
 } from "./Actions";
 import api from "../../apis/rick_morty";
 import { Character } from "./CharacterStore";
@@ -41,5 +42,12 @@ export function* apiCharacterById(action: any) {
     yield put(setLoading(true));
     const character = yield call(() => characterByIdFetch(action.payload));
     yield put(characterByIdRequestSuccess(character));
+    yield put(setLoading(false));
+}
+
+export function* apiCharacterByIdToCompare(action: any) {
+    yield put(setLoading(true));
+    const character = yield call(() => characterByIdFetch(action.payload));
+    yield put(characterByIdRequestToCompareSuccess(character));
     yield put(setLoading(false));
 }

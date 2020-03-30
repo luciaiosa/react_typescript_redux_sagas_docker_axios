@@ -9,7 +9,7 @@ import {
 import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import { styles } from "../../styles/DescriptionStyles";
-import image from "../../assets/episodes.jpeg";
+import image from "../../assets/first_episode.png";
 
 type TParams = { id: string };
 

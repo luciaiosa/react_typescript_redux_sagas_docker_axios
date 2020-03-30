@@ -3,7 +3,9 @@ import {
     GETTING_CHARACTERS,
     apiCharacters,
     GETTING_CHARACTER_BYID,
-    apiCharacterById
+    apiCharacterById,
+    GETTING_CHARACTER_BYID_TO_COMPARE,
+    apiCharacterByIdToCompare
 } from "./characters";
 import {
     GETTING_EPISODES,
@@ -21,6 +23,10 @@ import {
 export function* rootSaga() {
     yield takeLatest(GETTING_CHARACTERS, apiCharacters);
     yield takeLatest(GETTING_CHARACTER_BYID, apiCharacterById);
+    yield takeLatest(
+        GETTING_CHARACTER_BYID_TO_COMPARE,
+        apiCharacterByIdToCompare
+    );
 
     yield takeLatest(GETTING_EPISODES, apiEpisodes);
     yield takeLatest(GETTING_EPISODE_BYID, apiEpisodeById);
