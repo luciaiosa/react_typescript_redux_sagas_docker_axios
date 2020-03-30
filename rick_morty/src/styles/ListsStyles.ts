@@ -46,12 +46,17 @@ export const styles = makeStyles((theme: Theme) =>
             justifyContent: "space-between"
         },
         historyDescriptionRow: {
+            backgroundColor: "lightgrey",
+            height: 40,
+            paddingLeft: 20,
+            paddingRight: 20,
+            marginBottom: 10,
             width: "70%",
             marginLeft: "auto",
             marginRight: "auto",
-            paddingTop: 10,
             display: "flex",
-            justifyContent: "space-between"
+            justifyContent: "space-between",
+            alignItems: "center"
         },
         listTileContainer: {
             paddingLeft: 25,
