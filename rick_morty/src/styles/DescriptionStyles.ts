@@ -33,6 +33,15 @@ export const styles = makeStyles((theme: Theme) =>
         },
         descriptionRow: {
             paddingTop: 10
+        },
+        message: {
+            height: 70,
+            fontSize: 18,
+            lineHeight: "1.4285em",
+            margin: 5,
+            paddingLeft: 15,
+            marginTop: 15,
+            marginBottom: 15
         }
     })
 );

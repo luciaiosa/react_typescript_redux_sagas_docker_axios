@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import { Character, CharacterStore } from "../../store/characters";
 import { useSelector } from "react-redux";
 import { AppStore } from "../../store/app/AppStore";

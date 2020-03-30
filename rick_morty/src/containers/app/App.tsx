@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import CustomBreadcrumbs from "../../components/breadcrumbs/Breadcrumbs";
@@ -16,8 +16,8 @@ import LocationsList from "../locations/LocationList";
 import EpisodeDetail from "../episodes/EpisodeDetail";
 import LocationDetail from "../locations/LocationDetail";
 import ErrorPage from "../errorPage/ErrorPage";
-import CharactersComparation from "../characters-comparation/CharactersComparation";
-import history from "../../history";
+import CharactersComparation from "../characters/CharactersComparation";
+import CharactersHistory from "../characters/CharactersHistory";
 
 // Router is the router implementation for HTML5 browsers (vs Native).
 // Link is the replacement for anchor tags.
@@ -31,7 +31,7 @@ const App: FunctionComponent = () => {
     return (
         <div style={{ minHeight: "100vh" }}>
             {loading ? <Spinner message={literals.loadingMessage} /> : null}
-            <Router history={history}>
+            <BrowserRouter>
                 <Container maxWidth="lg">
                     <Header>
                         <CustomBreadcrumbs items={breadcrumbs} />
@@ -80,11 +80,16 @@ const App: FunctionComponent = () => {
                             exact
                             component={CharactersComparation}
                         />
+                        <Route
+                            path="/characters-history"
+                            exact
+                            component={CharactersHistory}
+                        />
                         <Route path="/404" exact component={ErrorPage} />
                     </Switch>
                     <Footer copyright="❮❯ by Opinno 2020" />
                 </Container>
-            </Router>
+            </BrowserRouter>
         </div>
     );
 };

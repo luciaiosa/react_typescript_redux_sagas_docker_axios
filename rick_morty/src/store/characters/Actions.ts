@@ -8,6 +8,7 @@ export const GOT_CHARACTER_BYID_TO_COMPARE = "GOT_CHARACTER_BYID_TO_COMPARE";
 
 export const CLEAR_CHARACTER_SELECTED = "CLEAR_CHARACTER_SELECTED";
 export const REMOVE_CHARACTER_TO_COMPARE = "REMOVE_CHARACTER_TO_COMPARE";
+export const REMOVE_CHARACTER_FROM_HISTORY = "REMOVE_CHARACTER_FROM_HISTORY";
 
 export const charactersRequest = (
     currentPage: number,
@@ -49,5 +50,10 @@ export const clearCharacterSelected = () => ({
 
 export const removeCharacterToCompare = (id: number) => ({
     type: REMOVE_CHARACTER_TO_COMPARE,
+    payload: id
+});
+
+export const removeCharacterFromHistory = (id: number) => ({
+    type: REMOVE_CHARACTER_FROM_HISTORY,
     payload: id
 });

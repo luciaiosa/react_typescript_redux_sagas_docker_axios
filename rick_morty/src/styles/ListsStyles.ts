@@ -45,6 +45,14 @@ export const styles = makeStyles((theme: Theme) =>
             display: "flex",
             justifyContent: "space-between"
         },
+        historyDescriptionRow: {
+            width: "70%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            paddingTop: 10,
+            display: "flex",
+            justifyContent: "space-between"
+        },
         listTileContainer: {
             paddingLeft: 25,
             paddingRight: 10

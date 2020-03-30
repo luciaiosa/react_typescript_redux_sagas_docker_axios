@@ -2,8 +2,10 @@ import React, { FunctionComponent, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setBreadcrumbs } from "../../store/app";
 import charactersImage from "../../assets/characters.jpeg";
+import characterCompareImage from "../../assets/first_episode.png";
+import characterHistoryImage from "../../assets/last_episode.png";
 import episodesImage from "../../assets/episodes.jpeg";
-import locationsImage from "../../assets/location.jpeg";
+import locationsImage from "../../assets/locations.jpeg";
 import { styles } from "../../styles/DescriptionStyles";
 import Carousel from "../../components/carousel/Carousel";
 
@@ -28,6 +30,24 @@ const Home: FunctionComponent = () => {
             linkUrl: "/characters",
             title: "Go to Characters list",
             subtitle: "See our characters list!"
+        },
+        {
+            image: {
+                source: characterCompareImage,
+                alt: "characters"
+            },
+            linkUrl: "/compare-characters",
+            title: "Compare Characters",
+            subtitle: "Compare characters from our list!"
+        },
+        {
+            image: {
+                source: characterHistoryImage,
+                alt: "characters"
+            },
+            linkUrl: "/characters-history",
+            title: "Go to Characters History",
+            subtitle: "See the history of all visited characters!"
         },
         {
             image: {

@@ -32,12 +32,7 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
             link: "/"
         },
         {
-            key: "CharacterList",
-            label: "Characters List",
-            link: "/characters"
-        },
-        {
-            key: "CharactersComaparation",
+            key: "CharactersComparation",
             label: "Compare",
             link: null
         }
