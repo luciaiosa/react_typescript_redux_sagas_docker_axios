@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 interface ModalProps {
     title: string;
     content: string;
-    actions: string;
+    action: string;
     onDismiss(): void;
 }
 /*
@@ -23,7 +23,7 @@ const Modal: FunctionComponent<ModalProps> = (
     return ReactDOM.createPortal(
         //   si pulso en cualquier sitio dentro de este div, gracias a la propagación, se cambia de página!!
         <div
-            onClick={props.onDismiss}
+            onClick={() => props.onDismiss()}
             className="ui dimmer modals visible active"
         >
             {/* Para que esto no ocurra, onClick={e => e.stopPropagation()} !!! */}
@@ -33,7 +33,7 @@ const Modal: FunctionComponent<ModalProps> = (
             >
                 <div className="header">{props.title}</div>
                 <div className="content">{props.content}</div>
-                <div className="actions">{props.actions}</div>
+                <div className="actions">{props.action}</div>
             </div>
         </div>,
         modal

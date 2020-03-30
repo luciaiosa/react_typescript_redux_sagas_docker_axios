@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaRegWindowClose } from "react-icons/fa";
 import {
@@ -10,9 +10,15 @@ import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import { styles } from "../../styles/ListsStyles";
 import { Link } from "react-router-dom";
+import Modal from "../../components/modal/Modal";
 
 const CharactersHistory: FunctionComponent = (): JSX.Element => {
     const classes = styles();
+
+    const [showModal, setShowModal] = useState(false);
+    const [characterHistoryRemovedId, setcharacterHistoryRemovedId] = useState(
+        0
+    );
 
     const { visitedCharactersHistory } = useSelector<AppStore, CharacterStore>(
         state => state.characterStore
@@ -36,7 +42,12 @@ const CharactersHistory: FunctionComponent = (): JSX.Element => {
     }, []);
 
     const onCharacterRemove = (characterId: number) => {
-        dispatch(removeCharacterFromHistory(characterId));
+        setcharacterHistoryRemovedId(characterId);
+        setShowModal(true);
+    };
+    const onCharacterRemoveConfirm = () => {
+        setShowModal(false);
+        dispatch(removeCharacterFromHistory(characterHistoryRemovedId));
     };
 
     const renderList = () => {
@@ -69,8 +80,23 @@ const CharactersHistory: FunctionComponent = (): JSX.Element => {
         );
     };
 
+    const renderModal = () => {
+        if (showModal) {
+            return (
+                <Modal
+                    title="Remove character history"
+                    content="Are you sure that you want to remove the character history?"
+                    action="Remove"
+                    onDismiss={() => onCharacterRemoveConfirm()}
+                ></Modal>
+            );
+        }
+        return <div></div>;
+    };
+
     return (
         <div className={classes.root}>
+            {renderModal()}
             <div className={classes.container}>
                 <div className={classes.pageHeader}>
                     <h2 className={classes.pageHeaderTitle}>
