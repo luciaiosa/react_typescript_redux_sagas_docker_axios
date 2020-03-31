@@ -1,18 +1,9 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setBreadcrumbs } from "../../store/app";
-import charactersImage from "../../assets/characters.jpeg";
-import characterCompareImage from "../../assets/first_episode.png";
-import characterHistoryImage from "../../assets/last_episode.png";
-import episodesImage from "../../assets/episodes.jpeg";
-import locationsImage from "../../assets/locations.jpeg";
 import { styles } from "../../styles/DescriptionStyles";
 import Carousel from "../../components/carousel/Carousel";
-
-// BrowserRouter is the router implementation for HTML5 browsers (vs Native).
-// Link is the replacement for anchor tags.
-// Route is the conditionally shown component based on matching a path to a URL.
-// Switch returns only the first matching route rather than all matching routes.
+import { slides } from "../../constants/HomeSlides";
 
 const Home: FunctionComponent = () => {
     const classes = styles();
@@ -21,53 +12,6 @@ const Home: FunctionComponent = () => {
         dispatch(setBreadcrumbs([]));
     }, [dispatch]);
 
-    const slides = [
-        {
-            image: {
-                source: charactersImage,
-                alt: "characters"
-            },
-            linkUrl: "/characters",
-            title: "Go to Characters list",
-            subtitle: "See our characters list!"
-        },
-        {
-            image: {
-                source: characterCompareImage,
-                alt: "characters"
-            },
-            linkUrl: "/compare-characters",
-            title: "Compare Characters",
-            subtitle: "Compare characters from our list!"
-        },
-        {
-            image: {
-                source: characterHistoryImage,
-                alt: "characters"
-            },
-            linkUrl: "/characters-history",
-            title: "Go to Characters History",
-            subtitle: "See the history of all visited characters!"
-        },
-        {
-            image: {
-                source: episodesImage,
-                alt: "episodes"
-            },
-            linkUrl: "/episodes",
-            title: "Go to Episodes list",
-            subtitle: "See our episodes list!"
-        },
-        {
-            image: {
-                source: locationsImage,
-                alt: "locations"
-            },
-            linkUrl: "/locations",
-            title: "Go to locations list",
-            subtitle: "See our locations list!"
-        }
-    ];
     return (
         <div className={classes.root}>
             <div className={classes.container}>
@@ -85,7 +29,7 @@ const Home: FunctionComponent = () => {
                         soon!
                     </p>
                 </div>
-                <Carousel slides={slides}></Carousel>
+                <Carousel slides={slides} timer={3000}></Carousel>
             </div>
         </div>
     );

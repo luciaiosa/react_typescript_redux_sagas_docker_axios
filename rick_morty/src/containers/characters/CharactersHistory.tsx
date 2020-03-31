@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaRegWindowClose } from "react-icons/fa";
+import { Close } from "@material-ui/icons";
 import {
     CharacterStore,
     History,
@@ -14,7 +14,6 @@ import Modal from "../../components/modal/Modal";
 
 const CharactersHistory: FunctionComponent = (): JSX.Element => {
     const classes = styles();
-
     const [showModal, setShowModal] = useState(false);
     const [characterHistoryRemovedId, setcharacterHistoryRemovedId] = useState(
         0
@@ -30,6 +29,11 @@ const CharactersHistory: FunctionComponent = (): JSX.Element => {
             key: "Home",
             label: "Home",
             link: "/"
+        },
+        {
+            key: "CharactersList",
+            label: "Characters",
+            link: "/characters"
         },
         {
             key: "CharactersHistory",
@@ -72,12 +76,27 @@ const CharactersHistory: FunctionComponent = (): JSX.Element => {
                                 onCharacterRemove(historyItem.characterId)
                             }
                         >
-                            <FaRegWindowClose name="close" />
+                            <Close name="close" />
                         </div>
                     </div>
                 </div>
             )
         );
+    };
+
+    const renderMessage = () => {
+        if (visitedCharactersHistory.length < 1) {
+            return (
+                <div className={classes.content}>
+                    <p className={classes.description}>
+                        You haven't seen any character detail yet. You can go to{" "}
+                        <Link to="/characters">Characters</Link>, and click any
+                        of them.
+                    </p>
+                </div>
+            );
+        }
+        return <div className={classes.blankDiv}>&nbsp;</div>;
     };
 
     const renderModal = () => {
@@ -100,9 +119,10 @@ const CharactersHistory: FunctionComponent = (): JSX.Element => {
             <div className={classes.container}>
                 <div className={classes.pageHeader}>
                     <h2 className={classes.pageHeaderTitle}>
-                        Characters History
+                        Last visited Characters
                     </h2>
                 </div>
+                {renderMessage()}
                 {renderList()}
             </div>
         </div>

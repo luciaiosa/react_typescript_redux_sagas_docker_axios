@@ -95,7 +95,7 @@ yarn add react-data-components @types/react-data-components --save
 ## Install material-ui
 
 ```
-yarn add @material-ui/core
+yarn add @material-ui/core @material-ui/icons
 ```
 
 ## Install styled-components

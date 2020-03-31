@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import CarouselIndicator from "./CarouselIndicator";
 import CarouselSlide from "./CarouselSlide";
@@ -16,6 +16,7 @@ export interface Slide {
 
 interface CarouselProps {
     slides: Slide[];
+    timer: number;
 }
 
 const Carousel: FunctionComponent<CarouselProps> = (
@@ -53,11 +54,11 @@ const Carousel: FunctionComponent<CarouselProps> = (
         setCurrentSlideIndex(index);
     };
 
-    // useEffect(() => {
-    //     const nextSlide = (currentSlideIndex + 1) % props.slides.length;
-    //     let id = setTimeout(() => goToSlide(nextSlide), props.timer);
-    //     return () => clearTimeout(id);
-    // }, [currentSlideIndex]);
+    useEffect(() => {
+        const nextSlide = (currentSlideIndex + 1) % props.slides.length;
+        let id = setTimeout(() => goToSlide(nextSlide), props.timer);
+        return () => clearTimeout(id);
+    }, [currentSlideIndex]);
 
     const renderSlides = (): JSX.Element[] => {
         return props.slides.map((slide: Slide, index: number) => {

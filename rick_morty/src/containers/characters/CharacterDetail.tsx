@@ -32,7 +32,7 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
             },
             {
                 key: "CharacterList",
-                label: "Characters List",
+                label: "Characters",
                 link: "/characters"
             },
             {
@@ -59,8 +59,8 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
                             <div>
                                 <div className={classes.descriptionRow}>
                                     <img
-                                        width={600}
-                                        height={400}
+                                        width={500}
+                                        height={300}
                                         src={selectedCharacter.image}
                                         alt="character"
                                     />
@@ -92,7 +92,7 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
                 </div>
             );
         }
-        return <div>Character Not Found!</div>;
+        return <div className={classes.blankDiv}>&nbsp;</div>;
     };
     return <div className={classes.root}>{renderContent()}</div>;
 };

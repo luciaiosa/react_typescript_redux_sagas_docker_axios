@@ -32,7 +32,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
         },
         {
             key: "CharacterList",
-            label: "Characters List",
+            label: "Characters",
             link: null
         }
     ];
@@ -109,6 +109,23 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
                         onSubmitSearch={() => onSearchBarTerm()}
                     />
                 </div>
+                <div className={classes.subMenu}>
+                    <div>
+                        <Link to={`/compare-characters`}>
+                            <h3 className={classes.center}>
+                                Compare characters
+                            </h3>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to={`/characters-history`}>
+                            <h3 className={classes.center}>
+                                Last visited characters
+                            </h3>
+                        </Link>
+                    </div>
+                </div>
+
                 <GridList
                     cellHeight={230}
                     cols={4}

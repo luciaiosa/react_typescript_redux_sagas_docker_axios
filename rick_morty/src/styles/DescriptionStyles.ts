@@ -24,7 +24,9 @@ export const styles = makeStyles((theme: Theme) =>
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            padding: "40px"
+            padding: "40px",
+            border: "1px solid #1dc9dd",
+            margin: 35
         },
         description: {
             fontSize: "1.3rem",
@@ -42,6 +44,18 @@ export const styles = makeStyles((theme: Theme) =>
             paddingLeft: 15,
             marginTop: 15,
             marginBottom: 15
+        },
+        blankDiv: {
+            height: 50
+        },
+        contentFollowLink: {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%"
+        },
+        center: {
+            margin: 0
         }
     })
 );

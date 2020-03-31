@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaRegWindowClose } from "react-icons/fa";
+import { Close } from "@material-ui/icons";
 import CharactersSelect from "../../components/simple-select/CharactersSelect";
 import {
     charactersRequest,
@@ -32,6 +32,11 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
             link: "/"
         },
         {
+            key: "CharactersList",
+            label: "Characters",
+            link: "/characters"
+        },
+        {
             key: "CharactersComparation",
             label: "Compare",
             link: null
@@ -52,6 +57,7 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
 
     const onCharacterRemove = (characterId: number) => {
         dispatch(removeCharacterToCompare(characterId));
+        setShowErrorMessage(false);
     };
 
     const renderErrorMessage = () => {
@@ -69,7 +75,7 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
         return selectedCharactersToCompare.map(
             (character: Character, index: number) => {
                 return (
-                    <GridListTile key={index}>
+                    <GridListTile key={index} className={classes.characterItem}>
                         <div className={classes.listTileContainer}>
                             <div className={classes.descriptionRow}>
                                 <div>
@@ -80,7 +86,7 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
                                         onCharacterRemove(character.id)
                                     }
                                 >
-                                    <FaRegWindowClose name="close" />
+                                    <Close name="close" />
                                 </div>
                             </div>
                             <div className={classes.descriptionRow}>
@@ -123,13 +129,16 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
                         onSelect={value => onCharacterSelect(value)}
                     ></CharactersSelect>
                 </div>
-                <div className={classes.message}>
-                    You can compare only two characters at the same time. Select
-                    them from the list! <br />
-                    You can remove one or both, and select them again.
+                <div className={classes.content}>
+                    <p className={classes.description}>
+                        You can compare only two characters at the same time.
+                        Select them from the list! You can remove one or both,
+                        and select them again.
+                    </p>
                 </div>
                 {renderErrorMessage()}
                 <GridList
+                    spacing={10}
                     cellHeight={230}
                     cols={2}
                     className={classes.gridList}

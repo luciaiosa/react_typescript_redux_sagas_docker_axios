@@ -14,7 +14,7 @@ import { setBreadcrumbs } from "../../store/app";
 import SearchBar from "../../components/search-bar/SearchBar";
 import { styles } from "../../styles/ListsStyles";
 import Pager from "../../components/pager/Pager";
-import image from "../../assets/last_episode.png";
+import image from "../../assets/first_episode.png";
 
 const LocationsList: FunctionComponent = (): JSX.Element => {
     const classes = styles();

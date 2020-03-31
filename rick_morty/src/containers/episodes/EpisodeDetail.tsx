@@ -92,7 +92,7 @@ const EpisodeDetail: FunctionComponent<RouteComponentProps<TParams>> = (
                 </div>
             );
         }
-        return <div>Episode Not Found!</div>;
+        return <div className={classes.blankDiv}>&nbsp;</div>;
     };
     return <div className={classes.root}>{renderContent()}</div>;
 };
