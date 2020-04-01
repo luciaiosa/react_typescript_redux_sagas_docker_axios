@@ -60,8 +60,8 @@ const LocationDetail: FunctionComponent<RouteComponentProps<TParams>> = (
                             <div>
                                 <div className={classes.descriptionRow}>
                                     <img
-                                        width={600}
-                                        height={400}
+                                        width={500}
+                                        height={300}
                                         src={image}
                                         alt="location"
                                     />

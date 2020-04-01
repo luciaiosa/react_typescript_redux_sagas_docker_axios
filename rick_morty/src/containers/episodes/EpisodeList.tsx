@@ -64,7 +64,7 @@ const EpisodesList: FunctionComponent = (): JSX.Element => {
             return (
                 <GridListTile key={index}>
                     <img src={image} alt={episode.name} />
-                    <Link to={`/episodes/${episode.id}`} className="header">
+                    <Link to={`/episodes/${episode.id}`}>
                         <GridListTileBar
                             title={episode.name}
                             subtitle={

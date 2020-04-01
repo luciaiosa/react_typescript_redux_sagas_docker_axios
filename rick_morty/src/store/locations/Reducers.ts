@@ -1,7 +1,7 @@
 import {
-    GETTING_LOCATIONS,
+    GET_LOCATIONS,
     GOT_LOCATIONS,
-    GETTING_LOCATION_BYID,
+    GET_LOCATION_BYID,
     GOT_LOCATION_BYID,
     CLEAR_LOCATION_SELECTED
 } from "./Actions";
@@ -13,8 +13,8 @@ export const locationStoreReducer: Reducer<LocationStore, AnyAction> = (
     action
 ) => {
     switch (action.type) {
-        case GETTING_LOCATIONS:
-        case GETTING_LOCATION_BYID:
+        case GET_LOCATIONS:
+        case GET_LOCATION_BYID:
             return { ...state, loading: true };
         case GOT_LOCATIONS:
             return { ...state, loading: false, locations: action.payload };

@@ -67,7 +67,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
             return (
                 <GridListTile key={index}>
                     <img src={character.image} alt={character.name} />
-                    <Link to={`/characters/${character.id}`} className="header">
+                    <Link to={`/characters/${character.id}`}>
                         <GridListTileBar
                             title={character.name}
                             subtitle={

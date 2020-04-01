@@ -1,6 +1,6 @@
 import charactersImage from "../assets/characters.jpeg";
-import characterHistoryImage from "../assets/first_episode.png";
-import characterCompareImage from "../assets/last_episode.png";
+// import characterHistoryImage from "../assets/first_episode.png";
+// import characterCompareImage from "../assets/last_episode.png";
 import episodesImage from "../assets/episodes.jpeg";
 import locationsImage from "../assets/locations.jpeg";
 

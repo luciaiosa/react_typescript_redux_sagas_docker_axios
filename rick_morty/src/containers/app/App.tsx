@@ -25,12 +25,16 @@ import CharactersHistory from "../characters/CharactersHistory";
 // Switch returns only the first matching route rather than all matching routes.
 
 const App: FunctionComponent = () => {
-    const { breadcrumbs, loading } = useSelector<AppStore, AppStore>(
-        state => state
-    );
+    const state = useSelector<AppStore, AppStore>(state => state);
+    const { breadcrumbs } = state;
+    const charactersLoading = state.characterStore.loading;
+    const episodesLoading = state.episodeStore.loading;
+    const locationsLoading = state.locationStore.loading;
     return (
         <div style={{ minHeight: "100vh" }}>
-            {loading ? <Spinner message={literals.loadingMessage} /> : null}
+            {charactersLoading || episodesLoading || locationsLoading ? (
+                <Spinner message={literals.loadingMessage} />
+            ) : null}
             <BrowserRouter>
                 <Container maxWidth="lg">
                     <Header>
@@ -85,9 +89,9 @@ const App: FunctionComponent = () => {
                             exact
                             component={CharactersHistory}
                         />
-                        <Route path="/404" exact component={ErrorPage} />
+                        <Route path="/error" exact component={ErrorPage} />
                     </Switch>
-                    <Footer copyright="❮❯ by Opinno 2020" />
+                    <Footer content="❮❯ by Opinno 2020" />
                 </Container>
             </BrowserRouter>
         </div>

@@ -24,11 +24,11 @@ export const useStyles = makeStyles(() =>
             color: "#424548",
             marginRight: 20,
             alignSelf: "center",
-            paddingLeft: 10
+            paddingLeft: 10,
+            "&:hover": {
+                color: "white"
+            }
         },
-        // linkMenu:hover {
-        //     color: white;
-        // }
         linksContainer: {
             display: "flex",
             justifyContent: "center",

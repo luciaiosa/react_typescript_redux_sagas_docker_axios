@@ -1,7 +1,7 @@
 import {
-    GETTING_CHARACTERS,
+    GET_CHARACTERS,
     GOT_CHARACTERS,
-    GETTING_CHARACTER_BYID,
+    GET_CHARACTER_BYID,
     GOT_CHARACTER_BYID,
     CLEAR_CHARACTER_SELECTED,
     GOT_CHARACTER_BYID_TO_COMPARE,
@@ -21,8 +21,8 @@ export const characterStoreReducer: Reducer<CharacterStore, AnyAction> = (
     action
 ) => {
     switch (action.type) {
-        case GETTING_CHARACTERS:
-        case GETTING_CHARACTER_BYID:
+        case GET_CHARACTERS:
+        case GET_CHARACTER_BYID:
             return { ...state, loading: true };
         case GOT_CHARACTERS:
             return {

@@ -1,4 +1,5 @@
 import { call, put } from "redux-saga/effects";
+import { push } from "react-router-redux";
 import {
     charactersRequestSuccess,
     characterByIdRequestSuccess,
@@ -6,7 +7,6 @@ import {
 } from "./Actions";
 import api from "../../apis/rick_morty";
 import { Character } from "./CharacterStore";
-import { setLoading } from "../app";
 
 const charactersFetch = async (currentPage: number, searchTerm?: string) => {
     const filter =
@@ -28,26 +28,28 @@ const characterByIdFetch = async (id: number) => {
     return response.data;
 };
 
-export function* apiCharacters(action: any) {
+export function* getCharacters(action: any) {
     //Use axios interceptor to set loading status
-    yield put(setLoading(true));
-    const response = yield call(() =>
-        charactersFetch(action.payload.currentPage, action.payload.searchTerm)
-    );
-    yield put(charactersRequestSuccess(response));
-    yield put(setLoading(false));
+    try {
+        const response = yield call(() =>
+            charactersFetch(
+                action.payload.currentPage,
+                action.payload.searchTerm
+            )
+        );
+        yield put(charactersRequestSuccess(response));
+    } catch (error) {
+        yield push("/error");
+        console.error(error);
+    }
 }
 
-export function* apiCharacterById(action: any) {
-    yield put(setLoading(true));
+export function* getCharacterById(action: any) {
     const character = yield call(() => characterByIdFetch(action.payload));
     yield put(characterByIdRequestSuccess(character));
-    yield put(setLoading(false));
 }
 
-export function* apiCharacterByIdToCompare(action: any) {
-    yield put(setLoading(true));
+export function* getCharacterByIdToCompare(action: any) {
     const character = yield call(() => characterByIdFetch(action.payload));
     yield put(characterByIdRequestToCompareSuccess(character));
-    yield put(setLoading(false));
 }

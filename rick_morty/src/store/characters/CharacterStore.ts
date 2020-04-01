@@ -16,6 +16,7 @@ export interface History {
 }
 
 export interface CharacterStore {
+    readonly loading: boolean;
     readonly pages: number;
     readonly characters: Character[];
     readonly selectedCharacter: Character | undefined;
@@ -24,6 +25,7 @@ export interface CharacterStore {
 }
 
 export const InitialCharacterStore: CharacterStore = {
+    loading: false,
     pages: 1,
     characters: [],
     selectedCharacter: undefined,

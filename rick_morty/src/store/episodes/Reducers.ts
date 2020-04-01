@@ -1,7 +1,7 @@
 import {
-    GETTING_EPISODES,
+    GET_EPISODES,
     GOT_EPISODES,
-    GETTING_EPISODE_BYID,
+    GET_EPISODE_BYID,
     GOT_EPISODE_BYID,
     CLEAR_EPISODE_SELECTED
 } from "./Actions";
@@ -13,8 +13,8 @@ export const episodeStoreReducer: Reducer<EpisodeStore, AnyAction> = (
     action
 ) => {
     switch (action.type) {
-        case GETTING_EPISODES:
-        case GETTING_EPISODE_BYID:
+        case GET_EPISODES:
+        case GET_EPISODE_BYID:
             return { ...state, loading: true };
         case GOT_EPISODES:
             return { ...state, loading: false, episodes: action.payload };

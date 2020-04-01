@@ -22,7 +22,13 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
         CharacterStore
     >(state => state.characterStore);
 
-    const [showErrorMessage, setShowErrorMessage] = useState(false);
+    const [
+        showDuplicatedCharactersErrorMessage,
+        setShowDuplicatedCharactersErrorMessage
+    ] = useState(false);
+    const [showMaxLengthErrorMessage, setShowMaxLengthErrorMessage] = useState(
+        false
+    );
 
     const dispatch = useDispatch();
     const breadCrumbs: BreadCrumb[] = [
@@ -48,27 +54,54 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
     }, []);
 
     const onCharacterSelect = (characterId: number) => {
-        if (selectedCharactersToCompare.length < 2) {
-            dispatch(characterByIdToCompareRequest(characterId));
-        } else {
-            setShowErrorMessage(true);
+        switch (selectedCharactersToCompare.length) {
+            case 0:
+                dispatch(characterByIdToCompareRequest(characterId));
+                break;
+            case 2:
+                setShowDuplicatedCharactersErrorMessage(false);
+                setShowMaxLengthErrorMessage(true);
+                break;
+            default:
+                selectedCharactersToCompare.map((character: Character) => {
+                    if (character.id != characterId) {
+                        dispatch(characterByIdToCompareRequest(characterId));
+                        setShowDuplicatedCharactersErrorMessage(false);
+                        setShowMaxLengthErrorMessage(false);
+                    } else {
+                        setShowDuplicatedCharactersErrorMessage(true);
+                        setShowMaxLengthErrorMessage(false);
+                    }
+                });
+                break;
         }
     };
 
     const onCharacterRemove = (characterId: number) => {
         dispatch(removeCharacterToCompare(characterId));
-        setShowErrorMessage(false);
+        setShowDuplicatedCharactersErrorMessage(false);
+        setShowMaxLengthErrorMessage(false);
     };
 
-    const renderErrorMessage = () => {
-        if (showErrorMessage) {
+    const renderMaxLengthErrorMessage = () => {
+        if (showMaxLengthErrorMessage) {
             return (
                 <div className={classes.errorMessage}>
                     Sorry, you only can compare two characters at the same time.
                 </div>
             );
         }
-        return <div className={classes.blankDiv}>&nbsp;</div>;
+        return null;
+    };
+    const renderDuplicatedCharactersErrorMessage = () => {
+        if (showDuplicatedCharactersErrorMessage) {
+            return (
+                <div className={classes.errorMessage}>
+                    Sorry, you can't select twice the same character.
+                </div>
+            );
+        }
+        return null;
     };
 
     const renderList = (): JSX.Element[] => {
@@ -136,7 +169,8 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
                         and select them again.
                     </p>
                 </div>
-                {renderErrorMessage()}
+                {renderMaxLengthErrorMessage()}
+                {renderDuplicatedCharactersErrorMessage()}
                 <GridList
                     spacing={10}
                     cellHeight={230}

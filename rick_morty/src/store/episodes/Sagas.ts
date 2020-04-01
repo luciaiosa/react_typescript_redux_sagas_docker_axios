@@ -2,7 +2,6 @@ import { call, put } from "redux-saga/effects";
 import { episodesRequestSuccess, episodeByIdRequestSuccess } from "./Actions";
 import api from "../../apis/rick_morty";
 import { Episode } from "./EpisodeStore";
-import { setLoading } from "../app";
 
 const episodesFetch = async (currentPage: number, searchTerm?: string) => {
     const filter =
@@ -20,19 +19,15 @@ const episodeByIdFetch = async (id: number) => {
     return response.data;
 };
 
-export function* apiEpisodes(action: any) {
+export function* getEpisodes(action: any) {
     //Use axios interceptor to set loading status
-    yield put(setLoading(true));
     const episodes = yield call(() =>
         episodesFetch(action.payload.currentPage, action.payload.searchTerm)
     );
     yield put(episodesRequestSuccess(episodes.results));
-    yield put(setLoading(false));
 }
 
-export function* apiEpisodeById(action: any) {
-    yield put(setLoading(true));
+export function* getEpisodeById(action: any) {
     const episode = yield call(() => episodeByIdFetch(action.payload));
     yield put(episodeByIdRequestSuccess(episode));
-    yield put(setLoading(false));
 }

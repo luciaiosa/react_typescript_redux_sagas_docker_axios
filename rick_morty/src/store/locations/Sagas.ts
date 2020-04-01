@@ -2,7 +2,6 @@ import { call, put } from "redux-saga/effects";
 import { locationsRequestSuccess, locationByIdRequestSuccess } from "./Actions";
 import api from "../../apis/rick_morty";
 import { Location } from "./LocationStore";
-import { setLoading } from "../app";
 
 const locationsFetch = async (currentPage: number, searchTerm?: string) => {
     const filter =
@@ -23,19 +22,15 @@ const locationByIdFetch = async (id: number) => {
     return response.data;
 };
 
-export function* apiLocations(action: any) {
+export function* getLocations(action: any) {
     //Use axios interceptor to set loading status
-    yield put(setLoading(true));
     const locations = yield call(() =>
         locationsFetch(action.payload.currentPage, action.payload.searchTerm)
     );
     yield put(locationsRequestSuccess(locations.results));
-    yield put(setLoading(false));
 }
 
-export function* apiLocationById(action: any) {
-    yield put(setLoading(true));
+export function* getLocationById(action: any) {
     const location = yield call(() => locationByIdFetch(action.payload));
     yield put(locationByIdRequestSuccess(location));
-    yield put(setLoading(false));
 }

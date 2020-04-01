@@ -1,11 +1,11 @@
-export const GETTING_LOCATIONS = "GETTING_LOCATIONS";
+export const GET_LOCATIONS = "GET_LOCATIONS";
 export const GOT_LOCATIONS = "GOT_LOCATIONS";
-export const GETTING_LOCATION_BYID = "GETTING_LOCATION_BYID";
+export const GET_LOCATION_BYID = "GET_LOCATION_BYID";
 export const GOT_LOCATION_BYID = "GOT_LOCATION_BYID";
 export const CLEAR_LOCATION_SELECTED = "CLEAR_LOCATION_SELECTED";
 
 export const locationsRequest = (currentPage: number, searchTerm?: string) => ({
-    type: GETTING_LOCATIONS,
+    type: GET_LOCATIONS,
     payload: { currentPage, searchTerm }
 });
 
@@ -15,7 +15,7 @@ export const locationsRequestSuccess = (payload: any) => ({
 });
 
 export const locationByIdRequest = (id: number) => ({
-    type: GETTING_LOCATION_BYID,
+    type: GET_LOCATION_BYID,
     payload: id
 });
 
