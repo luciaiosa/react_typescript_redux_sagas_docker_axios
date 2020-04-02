@@ -15,15 +15,17 @@ import SearchBar from "../../components/search-bar/SearchBar";
 import { styles } from "../../styles/ListsStyles";
 import Pagination from "../../components/pagination/Pagination";
 import image from "../../assets/first_episode.png";
+import Error from "../../components/error/Error";
 
 const LocationsList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const { locations, pages } = useSelector<AppStore, LocationStore>(
-        state => state.locationStore
-    );
+    const { locations, pages, hasError, errorMessage } = useSelector<
+        AppStore,
+        LocationStore
+    >(state => state.locationStore);
     const dispatch = useDispatch();
     const breadCrumbs: BreadCrumb[] = [
         {
@@ -96,6 +98,23 @@ const LocationsList: FunctionComponent = (): JSX.Element => {
         }
         return <div></div>;
     };
+    const renderContent = (): JSX.Element => {
+        if (hasError) {
+            return <Error title={errorMessage}></Error>;
+        }
+        return (
+            <div>
+                <GridList
+                    cellHeight={230}
+                    cols={4}
+                    className={classes.gridList}
+                >
+                    {renderList()}
+                </GridList>
+                {renderPagination()}
+            </div>
+        );
+    };
 
     return (
         <div className={classes.root}>
@@ -110,14 +129,7 @@ const LocationsList: FunctionComponent = (): JSX.Element => {
                         onSubmitSearch={() => onSearchBarTerm()}
                     />
                 </div>
-                <GridList
-                    cellHeight={230}
-                    cols={4}
-                    className={classes.gridList}
-                >
-                    {renderList()}
-                </GridList>
-                {renderPagination()}
+                {renderContent()}
             </div>
         </div>
     );

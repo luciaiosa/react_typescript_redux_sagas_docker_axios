@@ -13,11 +13,12 @@ import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import { styles } from "../../styles/ListsStyles";
 import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
+import Error from "../../components/error/Error";
 
 const CharactersComparation: FunctionComponent = (): JSX.Element => {
     const classes = styles();
 
-    const { selectedCharactersToCompare } = useSelector<
+    const { selectedCharactersToCompare, hasError, errorMessage } = useSelector<
         AppStore,
         CharacterStore
     >(state => state.characterStore);
@@ -150,18 +151,12 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
             }
         );
     };
-
-    return (
-        <div className={classes.root}>
-            <div className={classes.container}>
-                <div className={classes.pageHeader}>
-                    <h2 className={classes.pageHeaderTitle}>
-                        Compare Characters
-                    </h2>
-                    <CharactersSelect
-                        onSelect={value => onCharacterSelect(value)}
-                    ></CharactersSelect>
-                </div>
+    const renderContent = (): JSX.Element => {
+        if (hasError) {
+            return <Error title={errorMessage}></Error>;
+        }
+        return (
+            <div>
                 <div className={classes.content}>
                     <p className={classes.description}>
                         You can compare only two characters at the same time.
@@ -175,10 +170,26 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
                     spacing={10}
                     cellHeight={230}
                     cols={2}
-                    className={classes.gridList}
+                    className={classes.comparisonContainer}
                 >
                     {renderList()}
                 </GridList>
+            </div>
+        );
+    };
+
+    return (
+        <div className={classes.root}>
+            <div className={classes.container}>
+                <div className={classes.pageHeader}>
+                    <h2 className={classes.pageHeaderTitle}>
+                        Compare Characters
+                    </h2>
+                    <CharactersSelect
+                        onSelect={value => onCharacterSelect(value)}
+                    ></CharactersSelect>
+                </div>
+                {renderContent()}
             </div>
         </div>
     );

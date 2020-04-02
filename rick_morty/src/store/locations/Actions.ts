@@ -3,6 +3,7 @@ export const GOT_LOCATIONS = "GOT_LOCATIONS";
 export const GET_LOCATION_BYID = "GET_LOCATION_BYID";
 export const GOT_LOCATION_BYID = "GOT_LOCATION_BYID";
 export const CLEAR_LOCATION_SELECTED = "CLEAR_LOCATION_SELECTED";
+export const LOCATIONS_ERROR = "LOCATIONS_ERROR";
 
 export const locationsRequest = (currentPage: number, searchTerm?: string) => ({
     type: GET_LOCATIONS,
@@ -27,4 +28,9 @@ export const locationByIdRequestSuccess = (payload: any) => ({
 export const clearLocationSelected = () => ({
     type: CLEAR_LOCATION_SELECTED,
     payload: undefined
+});
+
+export const locationsRequestError = (payload: any) => ({
+    type: LOCATIONS_ERROR,
+    payload
 });

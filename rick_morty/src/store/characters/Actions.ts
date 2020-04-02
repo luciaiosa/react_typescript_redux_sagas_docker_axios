@@ -9,6 +9,8 @@ export const CLEAR_CHARACTER_SELECTED = "CLEAR_CHARACTER_SELECTED";
 export const REMOVE_CHARACTER_TO_COMPARE = "REMOVE_CHARACTER_TO_COMPARE";
 export const REMOVE_CHARACTER_FROM_HISTORY = "REMOVE_CHARACTER_FROM_HISTORY";
 
+export const CHARACTERS_ERROR = "CHARACTERS_ERROR";
+
 export const charactersRequest = (
     currentPage: number,
     searchTerm?: string
@@ -55,4 +57,9 @@ export const removeCharacterToCompare = (id: number) => ({
 export const removeCharacterFromHistory = (id: number) => ({
     type: REMOVE_CHARACTER_FROM_HISTORY,
     payload: id
+});
+
+export const charactersRequestError = (payload: any) => ({
+    type: CHARACTERS_ERROR,
+    payload
 });

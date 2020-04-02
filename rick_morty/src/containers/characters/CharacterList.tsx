@@ -14,15 +14,17 @@ import { setBreadcrumbs } from "../../store/app";
 import SearchBar from "../../components/search-bar/SearchBar";
 import { styles } from "../../styles/ListsStyles";
 import Pagination from "../../components/pagination/Pagination";
+import Error from "../../components/error/Error";
 
 const CharactersList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const { characters, pages } = useSelector<AppStore, CharacterStore>(
-        state => state.characterStore
-    );
+    const { characters, pages, hasError, errorMessage } = useSelector<
+        AppStore,
+        CharacterStore
+    >(state => state.characterStore);
     const dispatch = useDispatch();
     const breadCrumbs: BreadCrumb[] = [
         {
@@ -96,6 +98,24 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
         return <div></div>;
     };
 
+    const renderContent = (): JSX.Element => {
+        if (hasError) {
+            return <Error title={errorMessage}></Error>;
+        }
+        return (
+            <div>
+                <GridList
+                    cellHeight={230}
+                    cols={4}
+                    className={classes.gridList}
+                >
+                    {renderList()}
+                </GridList>
+                {renderPagination()}
+            </div>
+        );
+    };
+
     return (
         <div className={classes.root}>
             <div className={classes.container}>
@@ -125,15 +145,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
                         </Link>
                     </div>
                 </div>
-
-                <GridList
-                    cellHeight={230}
-                    cols={4}
-                    className={classes.gridList}
-                >
-                    {renderList()}
-                </GridList>
-                {renderPagination()}
+                {renderContent()}
             </div>
         </div>
     );

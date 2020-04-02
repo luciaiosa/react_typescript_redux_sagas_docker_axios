@@ -46,10 +46,10 @@ yarn build
 
 Para usar una librería con typescript, (axios, vis === libreria para hacer diagramas, ...) tengo que instalar (si lo pide, algunas tienen @types incluidos), aparte de vis, @types/vis!!!
 
-## Install redux, react-redux, react-router-redux y redux-saga
+## Install redux, react-redux y redux-saga
 
 ```
-yarn add redux react-redux redux-devtools @types/react-redux redux-saga react-router-redux @types/react-router-redux
+yarn add redux react-redux redux-devtools @types/react-redux redux-saga
 OR
 yarn add redux react-redux redux-devtools redux-thunk
 ```

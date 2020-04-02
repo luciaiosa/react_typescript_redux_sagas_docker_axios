@@ -15,7 +15,7 @@ import EpisodesList from "../episodes/EpisodeList";
 import LocationsList from "../locations/LocationList";
 import EpisodeDetail from "../episodes/EpisodeDetail";
 import LocationDetail from "../locations/LocationDetail";
-import ErrorPage from "../errorPage/ErrorPage";
+import Error from "../../components/error/Error";
 import CharactersComparation from "../characters/CharactersComparation";
 import CharactersHistory from "../characters/CharactersHistory";
 
@@ -89,7 +89,7 @@ const App: FunctionComponent = () => {
                             exact
                             component={CharactersHistory}
                         />
-                        <Route path="/error" exact component={ErrorPage} />
+                        <Route path="/error" exact component={Error} />
                     </Switch>
                     <Footer content="❮❯ by Opinno 2020" />
                 </Container>

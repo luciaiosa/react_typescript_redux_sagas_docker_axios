@@ -24,7 +24,6 @@ export const styles = makeStyles((theme: Theme) =>
             width: "100%",
             height: "auto",
             display: "flex",
-            justifyContent: "space-evenly",
             margin: "0 !important"
         },
         pageHeader: {
@@ -117,7 +116,7 @@ export const styles = makeStyles((theme: Theme) =>
             display: "flex",
             justifyContent: "space-evenly",
             alignItems: "center",
-            padding: "40px",
+            padding: "15px",
             border: "1px solid #1dc9dd",
             marginLeft: 35,
             marginBottom: 35,
@@ -132,6 +131,13 @@ export const styles = makeStyles((theme: Theme) =>
             width: "48% !important",
             height: 250,
             padding: 10
+        },
+        comparisonContainer: {
+            width: "100%",
+            height: "auto",
+            display: "flex",
+            justifyContent: "space-evenly",
+            margin: "0 !important"
         }
     })
 );

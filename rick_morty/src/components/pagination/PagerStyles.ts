@@ -27,13 +27,16 @@ export const styles = makeStyles(() =>
             border: "1px solid #ddd",
             cursor: "pointer",
             "&:hover": {
-                backgroundColor: "#ddd"
+                backgroundColor: "#ccccb3"
             }
         },
         active: {
             backgroundColor: "#ff01c1",
             color: "white",
-            border: "border: 1px solid #ff01c1"
+            border: "border: 1px solid #ff01c1",
+            "&:hover": {
+                backgroundColor: "#cc0052"
+            }
         },
         disabled: {
             pointerEvents: "none",

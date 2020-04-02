@@ -3,6 +3,7 @@ export const GOT_EPISODES = "GOT_EPISODES";
 export const GET_EPISODE_BYID = "GET_EPISODE_BYID";
 export const GOT_EPISODE_BYID = "GOT_EPISODE_BYID";
 export const CLEAR_EPISODE_SELECTED = "CLEAR_EPISODE_SELECTED";
+export const EPISODES_ERROR = "EPISODES_ERROR";
 
 export const episodesRequest = (currentPage: number, searchTerm?: string) => ({
     type: GET_EPISODES,
@@ -27,4 +28,9 @@ export const episodeByIdRequestSuccess = (payload: any) => ({
 export const clearEpisodeSelected = () => ({
     type: CLEAR_EPISODE_SELECTED,
     payload: undefined
+});
+
+export const episodesRequestError = (payload: any) => ({
+    type: EPISODES_ERROR,
+    payload
 });

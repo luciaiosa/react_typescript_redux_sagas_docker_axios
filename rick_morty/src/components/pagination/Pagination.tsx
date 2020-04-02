@@ -38,14 +38,12 @@ const Pagination: FunctionComponent<PagerProps> = (
             setNextButtonDisabled("");
         }
     };
-
     const changeSelectedPage = (indexSelected: number): void => {
         setSelectedPage(indexSelected);
         props.pageSelected(indexSelected);
         setPrevButtonClass(indexSelected);
         setNextButtonClass(indexSelected);
     };
-
     const onUpperEllipseSelect = (): void => {
         setEllipseUpperPagesNumber(
             ellipseUpperPagesNumber + PAGE_BOUND_NUMBER_PAGINATION
@@ -53,10 +51,8 @@ const Pagination: FunctionComponent<PagerProps> = (
         setEllipseLowerPagesNumber(
             ellipseLowerPagesNumber + PAGE_BOUND_NUMBER_PAGINATION
         );
-        let newIndexSelected = ellipseUpperPagesNumber + 1;
-        changeSelectedPage(newIndexSelected);
+        changeSelectedPage(ellipseUpperPagesNumber + 1);
     };
-
     const onLowerEllipseSelect = (): void => {
         setEllipseUpperPagesNumber(
             ellipseUpperPagesNumber - PAGE_BOUND_NUMBER_PAGINATION
@@ -64,11 +60,10 @@ const Pagination: FunctionComponent<PagerProps> = (
         setEllipseLowerPagesNumber(
             ellipseLowerPagesNumber - PAGE_BOUND_NUMBER_PAGINATION
         );
-        let newIndexSelected =
-            ellipseUpperPagesNumber - PAGE_BOUND_NUMBER_PAGINATION;
-        changeSelectedPage(newIndexSelected);
+        changeSelectedPage(
+            ellipseUpperPagesNumber - PAGE_BOUND_NUMBER_PAGINATION
+        );
     };
-
     const goToNextPage = (): void => {
         console.log(selectedPage);
         console.log(ellipseUpperPagesNumber);
@@ -80,10 +75,8 @@ const Pagination: FunctionComponent<PagerProps> = (
                 ellipseLowerPagesNumber + PAGE_BOUND_NUMBER_PAGINATION
             );
         }
-        let index = selectedPage + 1;
-        changeSelectedPage(index);
+        changeSelectedPage(selectedPage + 1);
     };
-
     const goToPrevPage = (): void => {
         if ((selectedPage - 1) % PAGE_BOUND_NUMBER_PAGINATION === 0) {
             setEllipseUpperPagesNumber(
@@ -93,11 +86,8 @@ const Pagination: FunctionComponent<PagerProps> = (
                 ellipseLowerPagesNumber - PAGE_BOUND_NUMBER_PAGINATION
             );
         }
-
-        let index = selectedPage - 1;
-        changeSelectedPage(index);
+        changeSelectedPage(selectedPage - 1);
     };
-
     const renderPageIncrementButton = () => {
         if (props.pageNumbers.length > ellipseUpperPagesNumber) {
             return (
@@ -110,7 +100,6 @@ const Pagination: FunctionComponent<PagerProps> = (
             );
         }
     };
-
     const renderPageDecrementButton = () => {
         if (ellipseLowerPagesNumber >= 1) {
             return (
@@ -123,7 +112,6 @@ const Pagination: FunctionComponent<PagerProps> = (
             );
         }
     };
-
     const renderPrevButton = () => {
         if (prevButtonDisabled === "disabled") {
             return (
@@ -144,7 +132,6 @@ const Pagination: FunctionComponent<PagerProps> = (
             );
         }
     };
-
     const renderNextButton = () => {
         if (nextButtonDisabled === "disabled") {
             return (
@@ -165,7 +152,6 @@ const Pagination: FunctionComponent<PagerProps> = (
             );
         }
     };
-
     const renderPageNumbers = () => {
         return props.pageNumbers.map((number: number) => {
             if (
@@ -207,7 +193,6 @@ const Pagination: FunctionComponent<PagerProps> = (
             }
         });
     };
-
     return (
         <div className={classes.center}>
             <ul className={classes.paginationList}>
@@ -220,5 +205,4 @@ const Pagination: FunctionComponent<PagerProps> = (
         </div>
     );
 };
-
 export default Pagination;

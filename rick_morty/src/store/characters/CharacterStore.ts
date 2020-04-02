@@ -22,6 +22,8 @@ export interface CharacterStore {
     readonly selectedCharacter: Character | undefined;
     readonly selectedCharactersToCompare: Character[];
     readonly visitedCharactersHistory: History[];
+    readonly hasError: boolean;
+    readonly errorMessage: string;
 }
 
 export const InitialCharacterStore: CharacterStore = {
@@ -30,5 +32,7 @@ export const InitialCharacterStore: CharacterStore = {
     characters: [],
     selectedCharacter: undefined,
     selectedCharactersToCompare: [],
-    visitedCharactersHistory: []
+    visitedCharactersHistory: [],
+    hasError: false,
+    errorMessage: ""
 };

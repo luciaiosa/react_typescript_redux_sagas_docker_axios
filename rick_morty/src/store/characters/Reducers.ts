@@ -6,7 +6,8 @@ import {
     CLEAR_CHARACTER_SELECTED,
     GOT_CHARACTER_BYID_TO_COMPARE,
     REMOVE_CHARACTER_TO_COMPARE,
-    REMOVE_CHARACTER_FROM_HISTORY
+    REMOVE_CHARACTER_FROM_HISTORY,
+    CHARACTERS_ERROR
 } from "./Actions";
 import { Reducer, AnyAction } from "redux";
 import {
@@ -21,6 +22,13 @@ export const characterStoreReducer: Reducer<CharacterStore, AnyAction> = (
     action
 ) => {
     switch (action.type) {
+        case CHARACTERS_ERROR:
+            return {
+                ...state,
+                hasError: true,
+                errorMessage: action.payload.message,
+                loading: false
+            };
         case GET_CHARACTERS:
         case GET_CHARACTER_BYID:
             return { ...state, loading: true };
@@ -29,13 +37,17 @@ export const characterStoreReducer: Reducer<CharacterStore, AnyAction> = (
                 ...state,
                 loading: false,
                 characters: action.payload.results,
-                pages: action.payload.info.pages
+                pages: action.payload.info.pages,
+                errorMessage: "",
+                hasError: false
             };
         case GOT_CHARACTER_BYID:
             return {
                 ...state,
                 loading: false,
                 selectedCharacter: action.payload,
+                errorMessage: "",
+                hasError: false,
                 visitedCharactersHistory: [
                     ...state.visitedCharactersHistory,
                     {
@@ -50,6 +62,8 @@ export const characterStoreReducer: Reducer<CharacterStore, AnyAction> = (
             return {
                 ...state,
                 loading: false,
+                errorMessage: "",
+                hasError: false,
                 selectedCharactersToCompare: [
                     ...state.selectedCharactersToCompare,
                     action.payload
