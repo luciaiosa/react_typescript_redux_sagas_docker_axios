@@ -39,7 +39,7 @@ const Pagination: FunctionComponent<PagerProps> = (
         }
     };
 
-    const onPageSelect = (indexSelected: number): void => {
+    const changeSelectedPage = (indexSelected: number): void => {
         setSelectedPage(indexSelected);
         props.pageSelected(indexSelected);
         setPrevButtonClass(indexSelected);
@@ -54,10 +54,7 @@ const Pagination: FunctionComponent<PagerProps> = (
             ellipseLowerPagesNumber + PAGE_BOUND_NUMBER_PAGINATION
         );
         let newIndexSelected = ellipseUpperPagesNumber + 1;
-        setSelectedPage(newIndexSelected);
-        props.pageSelected(newIndexSelected);
-        setPrevButtonClass(newIndexSelected);
-        setNextButtonClass(newIndexSelected);
+        changeSelectedPage(newIndexSelected);
     };
 
     const onLowerEllipseSelect = (): void => {
@@ -69,10 +66,7 @@ const Pagination: FunctionComponent<PagerProps> = (
         );
         let newIndexSelected =
             ellipseUpperPagesNumber - PAGE_BOUND_NUMBER_PAGINATION;
-        setSelectedPage(newIndexSelected);
-        props.pageSelected(newIndexSelected);
-        setPrevButtonClass(newIndexSelected);
-        setNextButtonClass(newIndexSelected);
+        changeSelectedPage(newIndexSelected);
     };
 
     const goToNextPage = (): void => {
@@ -87,10 +81,7 @@ const Pagination: FunctionComponent<PagerProps> = (
             );
         }
         let index = selectedPage + 1;
-        setSelectedPage(index);
-        props.pageSelected(index);
-        setPrevButtonClass(index);
-        setNextButtonClass(index);
+        changeSelectedPage(index);
     };
 
     const goToPrevPage = (): void => {
@@ -104,10 +95,7 @@ const Pagination: FunctionComponent<PagerProps> = (
         }
 
         let index = selectedPage - 1;
-        setSelectedPage(index);
-        props.pageSelected(index);
-        setPrevButtonClass(index);
-        setNextButtonClass(index);
+        changeSelectedPage(index);
     };
 
     const renderPageIncrementButton = () => {
@@ -189,7 +177,7 @@ const Pagination: FunctionComponent<PagerProps> = (
                         key={number}
                         value={number}
                         onClick={event =>
-                            onPageSelect(
+                            changeSelectedPage(
                                 Number((event.target as HTMLLIElement).value)
                             )
                         }
@@ -207,7 +195,7 @@ const Pagination: FunctionComponent<PagerProps> = (
                         key={number}
                         value={number}
                         onClick={event =>
-                            onPageSelect(
+                            changeSelectedPage(
                                 Number((event.target as HTMLLIElement).value)
                             )
                         }
