@@ -8,7 +8,7 @@ interface PagerProps {
     pageSelected(value: number): void;
 }
 
-const Pager: FunctionComponent<PagerProps> = (
+const Pagination: FunctionComponent<PagerProps> = (
     props: PagerProps
 ): JSX.Element => {
     const classes = styles();
@@ -17,23 +17,24 @@ const Pager: FunctionComponent<PagerProps> = (
         "disabled"
     );
     const [nextButtonDisabled, setNextButtonDisabled] = useState<string>("");
-    const [upperPagesNumber, setUpperPagesNumber] = useState<number>(10);
-    const [lowerPagesNumber, setLowerPagesNumber] = useState<number>(0);
+    const [ellipseUpperPagesNumber, setEllipseUpperPagesNumber] = useState<
+        number
+    >(10);
+    const [ellipseLowerPagesNumber, setEllipseLowerPagesNumber] = useState<
+        number
+    >(0);
 
     const setPrevButtonClass = (selectedPage: number) => {
-        if (
-            props.pageNumbers.length === selectedPage &&
-            props.pageNumbers.length > 1
-        ) {
-            setPrevButtonDisabled("");
-        } else if (props.pageNumbers.length > 1) {
+        if (selectedPage === 1) {
+            setPrevButtonDisabled("disabled");
+        } else {
             setPrevButtonDisabled("");
         }
     };
     const setNextButtonClass = (selectedPage: number) => {
-        if (selectedPage === 1 && props.pageNumbers.length > 1) {
-            setNextButtonDisabled("");
-        } else if (props.pageNumbers.length > 1) {
+        if (selectedPage === props.pageNumbers.length) {
+            setNextButtonDisabled("disabled");
+        } else {
             setNextButtonDisabled("");
         }
     };
@@ -45,20 +46,29 @@ const Pager: FunctionComponent<PagerProps> = (
         setNextButtonClass(indexSelected);
     };
 
-    const onUpperPageSelect = (): void => {
-        setUpperPagesNumber(upperPagesNumber + PAGE_BOUND_NUMBER_PAGINATION);
-        setLowerPagesNumber(lowerPagesNumber + PAGE_BOUND_NUMBER_PAGINATION);
-        let newIndexSelected = upperPagesNumber + 1;
+    const onUpperEllipseSelect = (): void => {
+        setEllipseUpperPagesNumber(
+            ellipseUpperPagesNumber + PAGE_BOUND_NUMBER_PAGINATION
+        );
+        setEllipseLowerPagesNumber(
+            ellipseLowerPagesNumber + PAGE_BOUND_NUMBER_PAGINATION
+        );
+        let newIndexSelected = ellipseUpperPagesNumber + 1;
         setSelectedPage(newIndexSelected);
         props.pageSelected(newIndexSelected);
         setPrevButtonClass(newIndexSelected);
         setNextButtonClass(newIndexSelected);
     };
 
-    const onLowerPageSelect = (): void => {
-        setUpperPagesNumber(upperPagesNumber - PAGE_BOUND_NUMBER_PAGINATION);
-        setLowerPagesNumber(lowerPagesNumber - PAGE_BOUND_NUMBER_PAGINATION);
-        let newIndexSelected = upperPagesNumber - PAGE_BOUND_NUMBER_PAGINATION;
+    const onLowerEllipseSelect = (): void => {
+        setEllipseUpperPagesNumber(
+            ellipseUpperPagesNumber - PAGE_BOUND_NUMBER_PAGINATION
+        );
+        setEllipseLowerPagesNumber(
+            ellipseLowerPagesNumber - PAGE_BOUND_NUMBER_PAGINATION
+        );
+        let newIndexSelected =
+            ellipseUpperPagesNumber - PAGE_BOUND_NUMBER_PAGINATION;
         setSelectedPage(newIndexSelected);
         props.pageSelected(newIndexSelected);
         setPrevButtonClass(newIndexSelected);
@@ -66,42 +76,46 @@ const Pager: FunctionComponent<PagerProps> = (
     };
 
     const goToNextPage = (): void => {
-        if (selectedPage + 1 > upperPagesNumber) {
-            setUpperPagesNumber(
-                upperPagesNumber + PAGE_BOUND_NUMBER_PAGINATION
+        console.log(selectedPage);
+        console.log(ellipseUpperPagesNumber);
+        if (selectedPage + 1 > ellipseUpperPagesNumber) {
+            setEllipseUpperPagesNumber(
+                ellipseUpperPagesNumber + PAGE_BOUND_NUMBER_PAGINATION
             );
-            setLowerPagesNumber(
-                lowerPagesNumber + PAGE_BOUND_NUMBER_PAGINATION
+            setEllipseLowerPagesNumber(
+                ellipseLowerPagesNumber + PAGE_BOUND_NUMBER_PAGINATION
             );
         }
         let index = selectedPage + 1;
         setSelectedPage(index);
+        props.pageSelected(index);
         setPrevButtonClass(index);
         setNextButtonClass(index);
     };
 
     const goToPrevPage = (): void => {
         if ((selectedPage - 1) % PAGE_BOUND_NUMBER_PAGINATION === 0) {
-            setUpperPagesNumber(
-                upperPagesNumber - PAGE_BOUND_NUMBER_PAGINATION
+            setEllipseUpperPagesNumber(
+                ellipseUpperPagesNumber - PAGE_BOUND_NUMBER_PAGINATION
             );
-            setLowerPagesNumber(
-                lowerPagesNumber - PAGE_BOUND_NUMBER_PAGINATION
+            setEllipseLowerPagesNumber(
+                ellipseLowerPagesNumber - PAGE_BOUND_NUMBER_PAGINATION
             );
         }
 
         let index = selectedPage - 1;
         setSelectedPage(index);
+        props.pageSelected(index);
         setPrevButtonClass(index);
         setNextButtonClass(index);
     };
 
     const renderPageIncrementButton = () => {
-        if (props.pageNumbers.length > upperPagesNumber) {
+        if (props.pageNumbers.length > ellipseUpperPagesNumber) {
             return (
                 <li
                     className={classes.paginationListItem}
-                    onClick={onUpperPageSelect}
+                    onClick={onUpperEllipseSelect}
                 >
                     &hellip;{" "}
                 </li>
@@ -110,11 +124,11 @@ const Pager: FunctionComponent<PagerProps> = (
     };
 
     const renderPageDecrementButton = () => {
-        if (lowerPagesNumber >= 1) {
+        if (ellipseLowerPagesNumber >= 1) {
             return (
                 <li
                     className={classes.paginationListItem}
-                    onClick={onLowerPageSelect}
+                    onClick={onLowerEllipseSelect}
                 >
                     &hellip;{" "}
                 </li>
@@ -185,8 +199,8 @@ const Pager: FunctionComponent<PagerProps> = (
                     </li>
                 );
             } else if (
-                number < upperPagesNumber + 1 &&
-                number > lowerPagesNumber
+                number < ellipseUpperPagesNumber + 1 &&
+                number > ellipseLowerPagesNumber
             ) {
                 return (
                     <li
@@ -219,4 +233,4 @@ const Pager: FunctionComponent<PagerProps> = (
     );
 };
 
-export default Pager;
+export default Pagination;

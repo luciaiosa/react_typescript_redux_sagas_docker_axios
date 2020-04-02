@@ -25,6 +25,7 @@ export const styles = makeStyles(() =>
             textDecoration: "none",
             transition: "background-color 0.3s",
             border: "1px solid #ddd",
+            cursor: "pointer",
             "&:hover": {
                 backgroundColor: "#ddd"
             }

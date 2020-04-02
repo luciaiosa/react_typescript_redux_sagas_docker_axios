@@ -13,7 +13,7 @@ import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import SearchBar from "../../components/search-bar/SearchBar";
 import { styles } from "../../styles/ListsStyles";
-import Pager from "../../components/pager/Pager";
+import Pagination from "../../components/pagination/Pagination";
 import image from "../../assets/first_episode.png";
 
 const LocationsList: FunctionComponent = (): JSX.Element => {
@@ -87,11 +87,11 @@ const LocationsList: FunctionComponent = (): JSX.Element => {
     const renderPagination = (): JSX.Element => {
         if (pages > 1) {
             return (
-                <Pager
+                <Pagination
                     pageNumbers={pageNumbers()}
                     currentPage={currentPage}
                     pageSelected={(value: number) => onCurrentPageChange(value)}
-                ></Pager>
+                ></Pagination>
             );
         }
         return <div></div>;
