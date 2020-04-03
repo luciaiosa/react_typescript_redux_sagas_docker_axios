@@ -8,7 +8,8 @@ export const styles = makeStyles(() =>
             height: 50,
             borderRadius: 5,
             flexDirection: "row",
-            width: "50%"
+            width: "50%",
+            marginRight: 10
         },
         select: {
             flex: 1,

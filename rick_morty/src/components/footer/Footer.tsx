@@ -2,6 +2,20 @@ import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import Menu from "../menu/Menu";
 
+interface FooterProps {
+    content: string;
+}
+const Footer: FunctionComponent<FooterProps> = (
+    props: FooterProps
+): JSX.Element => {
+    return (
+        <FooterContainer>
+            <Menu></Menu>
+            <FooterContent>{props.content}</FooterContent>
+        </FooterContainer>
+    );
+};
+
 const FooterContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -19,19 +33,5 @@ const FooterContent = styled.span`
     align-self: center;
     padding-top: 10px;
 `;
-
-interface FooterProps {
-    copyright: string;
-}
-const Footer: FunctionComponent<FooterProps> = (
-    props: FooterProps
-): JSX.Element => {
-    return (
-        <FooterContainer>
-            <Menu></Menu>
-            <FooterContent>{props.copyright}</FooterContent>
-        </FooterContainer>
-    );
-};
 
 export default Footer;

@@ -13,16 +13,18 @@ import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import SearchBar from "../../components/search-bar/SearchBar";
 import { styles } from "../../styles/ListsStyles";
-import Pager from "../../components/pager/Pager";
+import Pagination from "../../components/pagination/Pagination";
+import Error from "../../components/error/Error";
 
 const CharactersList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const { characters, pages } = useSelector<AppStore, CharacterStore>(
-        state => state.characterStore
-    );
+    const { characters, pages, hasError, errorMessage } = useSelector<
+        AppStore,
+        CharacterStore
+    >(state => state.characterStore);
     const dispatch = useDispatch();
     const breadCrumbs: BreadCrumb[] = [
         {
@@ -67,7 +69,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
             return (
                 <GridListTile key={index}>
                     <img src={character.image} alt={character.name} />
-                    <Link to={`/characters/${character.id}`} className="header">
+                    <Link to={`/characters/${character.id}`}>
                         <GridListTileBar
                             title={character.name}
                             subtitle={
@@ -86,14 +88,32 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
     const renderPagination = (): JSX.Element => {
         if (pages > 1) {
             return (
-                <Pager
+                <Pagination
                     pageNumbers={pageNumbers()}
                     currentPage={currentPage}
                     pageSelected={(value: number) => onCurrentPageChange(value)}
-                ></Pager>
+                ></Pagination>
             );
         }
         return <div></div>;
+    };
+
+    const renderContent = (): JSX.Element => {
+        if (hasError) {
+            return <Error title={errorMessage}></Error>;
+        }
+        return (
+            <div>
+                <GridList
+                    cellHeight={230}
+                    cols={4}
+                    className={classes.gridList}
+                >
+                    {renderList()}
+                </GridList>
+                {renderPagination()}
+            </div>
+        );
     };
 
     return (
@@ -125,15 +145,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
                         </Link>
                     </div>
                 </div>
-
-                <GridList
-                    cellHeight={230}
-                    cols={4}
-                    className={classes.gridList}
-                >
-                    {renderList()}
-                </GridList>
-                {renderPagination()}
+                {renderContent()}
             </div>
         </div>
     );

@@ -1,36 +1,33 @@
 import { takeLatest } from "redux-saga/effects";
 import {
-    GETTING_CHARACTERS,
-    apiCharacters,
-    GETTING_CHARACTER_BYID,
-    apiCharacterById,
-    GETTING_CHARACTER_BYID_TO_COMPARE,
-    apiCharacterByIdToCompare
+    GET_CHARACTERS,
+    getCharacters,
+    GET_CHARACTER_BYID,
+    getCharacterById,
+    GET_CHARACTER_BYID_TO_COMPARE,
+    getCharacterByIdToCompare
 } from "./characters";
 import {
-    GETTING_EPISODES,
-    apiEpisodes,
-    GETTING_EPISODE_BYID,
-    apiEpisodeById
+    GET_EPISODES,
+    getEpisodes,
+    GET_EPISODE_BYID,
+    getEpisodeById
 } from "./episodes";
 import {
-    GETTING_LOCATIONS,
-    apiLocations,
-    GETTING_LOCATION_BYID,
-    apiLocationById
+    GET_LOCATIONS,
+    getLocations,
+    GET_LOCATION_BYID,
+    getLocationById
 } from "./locations";
 
 export function* rootSaga() {
-    yield takeLatest(GETTING_CHARACTERS, apiCharacters);
-    yield takeLatest(GETTING_CHARACTER_BYID, apiCharacterById);
-    yield takeLatest(
-        GETTING_CHARACTER_BYID_TO_COMPARE,
-        apiCharacterByIdToCompare
-    );
+    yield takeLatest(GET_CHARACTERS, getCharacters);
+    yield takeLatest(GET_CHARACTER_BYID, getCharacterById);
+    yield takeLatest(GET_CHARACTER_BYID_TO_COMPARE, getCharacterByIdToCompare);
 
-    yield takeLatest(GETTING_EPISODES, apiEpisodes);
-    yield takeLatest(GETTING_EPISODE_BYID, apiEpisodeById);
+    yield takeLatest(GET_EPISODES, getEpisodes);
+    yield takeLatest(GET_EPISODE_BYID, getEpisodeById);
 
-    yield takeLatest(GETTING_LOCATIONS, apiLocations);
-    yield takeLatest(GETTING_LOCATION_BYID, apiLocationById);
+    yield takeLatest(GET_LOCATIONS, getLocations);
+    yield takeLatest(GET_LOCATION_BYID, getLocationById);
 }

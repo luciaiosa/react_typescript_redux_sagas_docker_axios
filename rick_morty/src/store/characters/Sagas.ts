@@ -2,52 +2,38 @@ import { call, put } from "redux-saga/effects";
 import {
     charactersRequestSuccess,
     characterByIdRequestSuccess,
-    characterByIdRequestToCompareSuccess
+    characterByIdRequestToCompareSuccess,
+    charactersRequestError
 } from "./Actions";
-import api from "../../apis/rick_morty";
-import { Character } from "./CharacterStore";
-import { setLoading } from "../app";
+import { charactersFetch, characterByIdFetch } from "./Services";
 
-const charactersFetch = async (currentPage: number, searchTerm?: string) => {
-    const filter =
-        searchTerm === "" || searchTerm === undefined
-            ? {}
-            : { name: searchTerm };
-    const response = await api.get<Character[]>(
-        `/character/?page=${currentPage}`,
-        {
-            params: filter
-        }
-    );
-
-    return response.data;
-};
-
-const characterByIdFetch = async (id: number) => {
-    const response = await api.get<Character[]>(`/character/${id}`);
-    return response.data;
-};
-
-export function* apiCharacters(action: any) {
-    //Use axios interceptor to set loading status
-    yield put(setLoading(true));
-    const response = yield call(() =>
-        charactersFetch(action.payload.currentPage, action.payload.searchTerm)
-    );
-    yield put(charactersRequestSuccess(response));
-    yield put(setLoading(false));
+export function* getCharacters(action: any) {
+    try {
+        const response = yield call(
+            charactersFetch,
+            action.payload.currentPage,
+            action.payload.searchTerm
+        );
+        yield put(charactersRequestSuccess(response));
+    } catch (error) {
+        yield put(charactersRequestError(error));
+    }
 }
 
-export function* apiCharacterById(action: any) {
-    yield put(setLoading(true));
-    const character = yield call(() => characterByIdFetch(action.payload));
-    yield put(characterByIdRequestSuccess(character));
-    yield put(setLoading(false));
+export function* getCharacterById(action: any) {
+    try {
+        const character = yield call(characterByIdFetch, action.payload);
+        yield put(characterByIdRequestSuccess(character));
+    } catch (error) {
+        yield put(charactersRequestError(error));
+    }
 }
 
-export function* apiCharacterByIdToCompare(action: any) {
-    yield put(setLoading(true));
-    const character = yield call(() => characterByIdFetch(action.payload));
-    yield put(characterByIdRequestToCompareSuccess(character));
-    yield put(setLoading(false));
+export function* getCharacterByIdToCompare(action: any) {
+    try {
+        const character = yield call(characterByIdFetch, action.payload);
+        yield put(characterByIdRequestToCompareSuccess(character));
+    } catch (error) {
+        yield put(charactersRequestError(error));
+    }
 }

@@ -15,8 +15,6 @@ npm install -g typescript
 ## Create typescript and React app
 
 ```
-npx create-react-app name --typescript
-OR, NEW VERSION:
 npx create-react-app name --template typescript
 cd name
 yarn start
@@ -51,12 +49,12 @@ Para usar una librería con typescript, (axios, vis === libreria para hacer diag
 ## Install redux, react-redux y redux-saga
 
 ```
-yarn add redux react-redux redux-devtools @types/react-redux redux-saga ( = middleware)
+yarn add redux react-redux redux-devtools @types/react-redux redux-saga
 OR
-yarn add redux react-redux redux-devtools redux-thunk (= middleware)
+yarn add redux react-redux redux-devtools redux-thunk
 ```
 
-redux-saga = librería hecha con la intención de facilitar el manejo de efectos secundarios (side effects) (ej. operaciones asíncronas como la obtención de datos (data fetching) y cosas impuras como el acceso al cache del navegador), de manera más eficiente, más simple de probar, y para mejorar el manejo de fallas.
+redux-saga =(middleware) librería hecha con la intención de facilitar el manejo de efectos secundarios (side effects) (ej. operaciones asíncronas como la obtención de datos (data fetching) y cosas impuras como el acceso al cache del navegador), de manera más eficiente, más simple de probar, y para mejorar el manejo de fallas.
 El modelo mental es que una saga represente (a manera de simulación) un hilo diferente en la aplicación y que únicamente sea responsable de los efectos secundarios. redux-saga es un middleware (capa intermedia) de redux, lo que significa que este "hilo" puede ser iniciado, suspendido, y cancelado desde la aplicación principal con una acción cualquiera de redux, tiene acceso a todo el estado (state) de la aplicación en redux y también puede ejecutar (dispatch) acciones en redux.
 Usa una de las caracteristicas de ES6 es la llamada Generadores (Generators) para que procedimientos o operaciones asíncronas sean fáciles de leer, escribir y probar.
 

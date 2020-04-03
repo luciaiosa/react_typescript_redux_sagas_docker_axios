@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import "./Pager.css";
+import { styles } from "./PagerStyles";
 
 interface PagerProps {
     pageNumbers: Array<number>;
@@ -9,6 +9,7 @@ interface PagerProps {
 const Pager: FunctionComponent<PagerProps> = (
     props: PagerProps
 ): JSX.Element => {
+    const classes = styles();
     const [selectedPage, setSelectedPage] = useState<number>(1);
 
     const onPageSelect = (indexSelected: number): void => {
@@ -30,8 +31,24 @@ const Pager: FunctionComponent<PagerProps> = (
         }
     };
 
-    const renderPageNumbers = (): JSX.Element[] => {
+    const renderPageNumbers = () => {
         return props.pageNumbers.map((number: number) => {
+            if (number === props.currentPage) {
+                return (
+                    <li
+                        key={number}
+                        value={number}
+                        onClick={event =>
+                            onPageSelect(
+                                Number((event.target as HTMLLIElement).value)
+                            )
+                        }
+                        className={`${classes.active} ${classes.paginationListItem}`}
+                    >
+                        {number}
+                    </li>
+                );
+            }
             return (
                 <li
                     key={number}
@@ -41,7 +58,7 @@ const Pager: FunctionComponent<PagerProps> = (
                             Number((event.target as HTMLLIElement).value)
                         )
                     }
-                    className={number === props.currentPage ? "active" : ""}
+                    className={classes.paginationListItem}
                 >
                     {number}
                 </li>
@@ -49,13 +66,21 @@ const Pager: FunctionComponent<PagerProps> = (
         });
     };
     return (
-        <div className="center">
-            <ul className="pagination">
-                <li onClick={goToPrevPage} title="Go to previous page">
+        <div className={classes.center}>
+            <ul className={classes.paginationList}>
+                <li
+                    onClick={goToPrevPage}
+                    title="Go to previous page"
+                    className={classes.paginationListItem}
+                >
                     &laquo;
                 </li>
                 {renderPageNumbers()}
-                <li onClick={goToNextPage} title="Go to next page">
+                <li
+                    onClick={goToNextPage}
+                    title="Go to next page"
+                    className={classes.paginationListItem}
+                >
                     &raquo;
                 </li>
             </ul>

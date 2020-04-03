@@ -12,8 +12,7 @@ export const initialAppStore: AppStore = {
     breadcrumbs: [],
     characterStore: InitialCharacterStore,
     episodeStore: InitialEpisodeStore,
-    locationStore: InitialLocationStore,
-    loading: false
+    locationStore: InitialLocationStore
 };
 
 export interface AppStore {
@@ -21,5 +20,4 @@ export interface AppStore {
     episodeStore: EpisodeStore;
     locationStore: LocationStore;
     breadcrumbs: BreadCrumb[];
-    loading: boolean;
 }

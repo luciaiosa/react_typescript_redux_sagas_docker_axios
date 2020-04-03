@@ -13,16 +13,23 @@ import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import { styles } from "../../styles/ListsStyles";
 import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
+import Error from "../../components/error/Error";
 
 const CharactersComparation: FunctionComponent = (): JSX.Element => {
     const classes = styles();
 
-    const { selectedCharactersToCompare } = useSelector<
+    const { selectedCharactersToCompare, hasError, errorMessage } = useSelector<
         AppStore,
         CharacterStore
     >(state => state.characterStore);
 
-    const [showErrorMessage, setShowErrorMessage] = useState(false);
+    const [
+        showDuplicatedCharactersErrorMessage,
+        setShowDuplicatedCharactersErrorMessage
+    ] = useState(false);
+    const [showMaxLengthErrorMessage, setShowMaxLengthErrorMessage] = useState(
+        false
+    );
 
     const dispatch = useDispatch();
     const breadCrumbs: BreadCrumb[] = [
@@ -48,27 +55,54 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
     }, []);
 
     const onCharacterSelect = (characterId: number) => {
-        if (selectedCharactersToCompare.length < 2) {
-            dispatch(characterByIdToCompareRequest(characterId));
-        } else {
-            setShowErrorMessage(true);
+        switch (selectedCharactersToCompare.length) {
+            case 0:
+                dispatch(characterByIdToCompareRequest(characterId));
+                break;
+            case 2:
+                setShowDuplicatedCharactersErrorMessage(false);
+                setShowMaxLengthErrorMessage(true);
+                break;
+            default:
+                selectedCharactersToCompare.map((character: Character) => {
+                    if (character.id != characterId) {
+                        dispatch(characterByIdToCompareRequest(characterId));
+                        setShowDuplicatedCharactersErrorMessage(false);
+                        setShowMaxLengthErrorMessage(false);
+                    } else {
+                        setShowDuplicatedCharactersErrorMessage(true);
+                        setShowMaxLengthErrorMessage(false);
+                    }
+                });
+                break;
         }
     };
 
     const onCharacterRemove = (characterId: number) => {
         dispatch(removeCharacterToCompare(characterId));
-        setShowErrorMessage(false);
+        setShowDuplicatedCharactersErrorMessage(false);
+        setShowMaxLengthErrorMessage(false);
     };
 
-    const renderErrorMessage = () => {
-        if (showErrorMessage) {
+    const renderMaxLengthErrorMessage = () => {
+        if (showMaxLengthErrorMessage) {
             return (
                 <div className={classes.errorMessage}>
                     Sorry, you only can compare two characters at the same time.
                 </div>
             );
         }
-        return <div className={classes.blankDiv}>&nbsp;</div>;
+        return null;
+    };
+    const renderDuplicatedCharactersErrorMessage = () => {
+        if (showDuplicatedCharactersErrorMessage) {
+            return (
+                <div className={classes.errorMessage}>
+                    Sorry, you can't select twice the same character.
+                </div>
+            );
+        }
+        return null;
     };
 
     const renderList = (): JSX.Element[] => {
@@ -117,6 +151,32 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
             }
         );
     };
+    const renderContent = (): JSX.Element => {
+        if (hasError) {
+            return <Error title={errorMessage}></Error>;
+        }
+        return (
+            <div>
+                <div className={classes.content}>
+                    <p className={classes.description}>
+                        You can compare only two characters at the same time.
+                        Select them from the list! You can remove one or both,
+                        and select them again.
+                    </p>
+                </div>
+                {renderMaxLengthErrorMessage()}
+                {renderDuplicatedCharactersErrorMessage()}
+                <GridList
+                    spacing={10}
+                    cellHeight={230}
+                    cols={2}
+                    className={classes.comparisonContainer}
+                >
+                    {renderList()}
+                </GridList>
+            </div>
+        );
+    };
 
     return (
         <div className={classes.root}>
@@ -129,22 +189,7 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
                         onSelect={value => onCharacterSelect(value)}
                     ></CharactersSelect>
                 </div>
-                <div className={classes.content}>
-                    <p className={classes.description}>
-                        You can compare only two characters at the same time.
-                        Select them from the list! You can remove one or both,
-                        and select them again.
-                    </p>
-                </div>
-                {renderErrorMessage()}
-                <GridList
-                    spacing={10}
-                    cellHeight={230}
-                    cols={2}
-                    className={classes.gridList}
-                >
-                    {renderList()}
-                </GridList>
+                {renderContent()}
             </div>
         </div>
     );

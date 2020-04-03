@@ -1,20 +1,21 @@
-export const GETTING_CHARACTERS = "GETTING_CHARACTERS";
+export const GET_CHARACTERS = "GET_CHARACTERS";
 export const GOT_CHARACTERS = "GOT_CHARACTERS";
-export const GETTING_CHARACTER_BYID = "GETTING_CHARACTER_BYID";
+export const GET_CHARACTER_BYID = "GET_CHARACTER_BYID";
 export const GOT_CHARACTER_BYID = "GOT_CHARACTER_BYID";
-export const GETTING_CHARACTER_BYID_TO_COMPARE =
-    "GETTING_CHARACTER_BYID_TO_COMPARE";
+export const GET_CHARACTER_BYID_TO_COMPARE = "GET_CHARACTER_BYID_TO_COMPARE";
 export const GOT_CHARACTER_BYID_TO_COMPARE = "GOT_CHARACTER_BYID_TO_COMPARE";
 
 export const CLEAR_CHARACTER_SELECTED = "CLEAR_CHARACTER_SELECTED";
 export const REMOVE_CHARACTER_TO_COMPARE = "REMOVE_CHARACTER_TO_COMPARE";
 export const REMOVE_CHARACTER_FROM_HISTORY = "REMOVE_CHARACTER_FROM_HISTORY";
 
+export const CHARACTERS_ERROR = "CHARACTERS_ERROR";
+
 export const charactersRequest = (
     currentPage: number,
     searchTerm?: string
 ) => ({
-    type: GETTING_CHARACTERS,
+    type: GET_CHARACTERS,
     payload: { currentPage, searchTerm }
 });
 
@@ -24,7 +25,7 @@ export const charactersRequestSuccess = (payload: any) => ({
 });
 
 export const characterByIdRequest = (id: number) => ({
-    type: GETTING_CHARACTER_BYID,
+    type: GET_CHARACTER_BYID,
     payload: id
 });
 
@@ -34,7 +35,7 @@ export const characterByIdRequestSuccess = (payload: any) => ({
 });
 
 export const characterByIdToCompareRequest = (id: number) => ({
-    type: GETTING_CHARACTER_BYID_TO_COMPARE,
+    type: GET_CHARACTER_BYID_TO_COMPARE,
     payload: id
 });
 
@@ -56,4 +57,9 @@ export const removeCharacterToCompare = (id: number) => ({
 export const removeCharacterFromHistory = (id: number) => ({
     type: REMOVE_CHARACTER_FROM_HISTORY,
     payload: id
+});
+
+export const charactersRequestError = (payload: any) => ({
+    type: CHARACTERS_ERROR,
+    payload
 });

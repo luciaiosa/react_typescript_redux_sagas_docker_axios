@@ -9,7 +9,7 @@ import EpisodeDetail from "../../containers/episodes/EpisodeDetail";
 import LocationDetail from "../../containers/locations/LocationDetail";
 import CharactersComparation from "../../containers/characters/CharactersComparation";
 import CharactersHistory from "../../containers/characters/CharactersHistory";
-import ErrorPage from "../../containers/errorPage/ErrorPage";
+import Error from "../error/Error";
 
 const Routing: FunctionComponent = () => {
     return (
@@ -42,7 +42,7 @@ const Routing: FunctionComponent = () => {
                     exact
                     component={CharactersHistory}
                 />
-                <Route path="/404" exact component={ErrorPage} />
+                <Route path="/404" exact component={Error} />
             </Switch>
         </BrowserRouter>
     );

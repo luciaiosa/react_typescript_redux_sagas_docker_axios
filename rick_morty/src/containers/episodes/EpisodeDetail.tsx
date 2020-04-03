@@ -10,6 +10,7 @@ import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import { styles } from "../../styles/DescriptionStyles";
 import image from "../../assets/first_episode.png";
+import Error from "../../components/error/Error";
 
 type TParams = { id: string };
 
@@ -18,9 +19,10 @@ const EpisodeDetail: FunctionComponent<RouteComponentProps<TParams>> = (
 ): JSX.Element => {
     const classes = styles();
     const dispatch = useDispatch();
-    const { selectedEpisode } = useSelector<AppStore, EpisodeStore>(
-        state => state.episodeStore
-    );
+    const { selectedEpisode, hasError, errorMessage } = useSelector<
+        AppStore,
+        EpisodeStore
+    >(state => state.episodeStore);
 
     useEffect(() => {
         const { params } = props.match;
@@ -50,43 +52,42 @@ const EpisodeDetail: FunctionComponent<RouteComponentProps<TParams>> = (
     }, [dispatch]);
 
     const renderContent = () => {
+        if (hasError) {
+            return <Error title={errorMessage}></Error>;
+        }
         if (selectedEpisode !== undefined) {
             return (
-                <div className={classes.root}>
-                    <div className={classes.container}>
-                        <div className={classes.content}>
-                            <h2>{selectedEpisode.name}</h2>
-                            <div>
-                                <div className={classes.descriptionRow}>
-                                    <img
-                                        width={600}
-                                        height={400}
-                                        src={image}
-                                        alt="episode"
-                                    />
-                                </div>
-                                <div className={classes.descriptionRow}>
-                                    <p className={classes.description}>
-                                        Id: {selectedEpisode.id} - created:{" "}
-                                        {selectedEpisode.created}
-                                    </p>
-                                </div>
-                                <div className={classes.descriptionRow}>
-                                    <p className={classes.description}>
-                                        Air date: {selectedEpisode.air_date}
-                                    </p>
-                                </div>
-                                <div className={classes.descriptionRow}>
-                                    <p className={classes.description}>
-                                        Episode: {selectedEpisode.episode}
-                                    </p>
-                                </div>
-                                <div className={classes.descriptionRow}>
-                                    <p className={classes.description}>
-                                        Url: {selectedEpisode.url}
-                                    </p>
-                                </div>
-                            </div>
+                <div className={classes.content}>
+                    <h2>{selectedEpisode.name}</h2>
+                    <div>
+                        <div className={classes.descriptionRow}>
+                            <img
+                                width={500}
+                                height={300}
+                                src={image}
+                                alt="episode"
+                            />
+                        </div>
+                        <div className={classes.descriptionRow}>
+                            <p className={classes.description}>
+                                Id: {selectedEpisode.id} - created:{" "}
+                                {selectedEpisode.created}
+                            </p>
+                        </div>
+                        <div className={classes.descriptionRow}>
+                            <p className={classes.description}>
+                                Air date: {selectedEpisode.air_date}
+                            </p>
+                        </div>
+                        <div className={classes.descriptionRow}>
+                            <p className={classes.description}>
+                                Episode: {selectedEpisode.episode}
+                            </p>
+                        </div>
+                        <div className={classes.descriptionRow}>
+                            <p className={classes.description}>
+                                Url: {selectedEpisode.url}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -94,7 +95,11 @@ const EpisodeDetail: FunctionComponent<RouteComponentProps<TParams>> = (
         }
         return <div className={classes.blankDiv}>&nbsp;</div>;
     };
-    return <div className={classes.root}>{renderContent()}</div>;
+    return (
+        <div className={classes.root}>
+            <div className={classes.container}>{renderContent()}</div>
+        </div>
+    );
 };
 
 export default EpisodeDetail;

@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Menu.css";
+import { useStyles } from "./MenuStyles";
 
 const Menu = (): JSX.Element => {
+    const classes = useStyles();
     return (
-        <div className="links-container">
-            <Link to="/characters" className="link-menu">
+        <div className={classes.linksContainer}>
+            <Link to="/characters" className={classes.linkMenu}>
                 Characters
             </Link>
-            <Link to="/locations" className="link-menu">
+            <Link to="/locations" className={classes.linkMenu}>
                 Locations
             </Link>
-            <Link to="/episodes" className="link-menu">
+            <Link to="/episodes" className={classes.linkMenu}>
                 Episodes
             </Link>
         </div>

@@ -14,7 +14,7 @@ export const styles = makeStyles((theme: Theme) =>
         container: {
             display: "flex",
             flexWrap: "wrap",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             alignContent: "center",
             overflow: "hidden",
             flexDirection: "column"

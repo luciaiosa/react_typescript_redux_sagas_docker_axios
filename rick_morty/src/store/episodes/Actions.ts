@@ -1,11 +1,12 @@
-export const GETTING_EPISODES = "GETTING_EPISODES";
+export const GET_EPISODES = "GET_EPISODES";
 export const GOT_EPISODES = "GOT_EPISODES";
-export const GETTING_EPISODE_BYID = "GETTING_EPISODE_BYID";
+export const GET_EPISODE_BYID = "GET_EPISODE_BYID";
 export const GOT_EPISODE_BYID = "GOT_EPISODE_BYID";
 export const CLEAR_EPISODE_SELECTED = "CLEAR_EPISODE_SELECTED";
+export const EPISODES_ERROR = "EPISODES_ERROR";
 
 export const episodesRequest = (currentPage: number, searchTerm?: string) => ({
-    type: GETTING_EPISODES,
+    type: GET_EPISODES,
     payload: { currentPage, searchTerm }
 });
 
@@ -15,7 +16,7 @@ export const episodesRequestSuccess = (payload: any) => ({
 });
 
 export const episodeByIdRequest = (id: number) => ({
-    type: GETTING_EPISODE_BYID,
+    type: GET_EPISODE_BYID,
     payload: id
 });
 
@@ -27,4 +28,9 @@ export const episodeByIdRequestSuccess = (payload: any) => ({
 export const clearEpisodeSelected = () => ({
     type: CLEAR_EPISODE_SELECTED,
     payload: undefined
+});
+
+export const episodesRequestError = (payload: any) => ({
+    type: EPISODES_ERROR,
+    payload
 });

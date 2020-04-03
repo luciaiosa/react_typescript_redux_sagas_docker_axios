@@ -2,8 +2,32 @@ import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Menu from "../menu/Menu";
+import { useStyles } from "../menu/MenuStyles";
 
 const logo = require("../../assets/logo1.png");
+
+interface HeaderProps {
+    children?: JSX.Element;
+}
+
+const Header: FunctionComponent<HeaderProps> = (
+    props: HeaderProps
+): JSX.Element => {
+    const classes = useStyles();
+    return (
+        <LinksContainer>
+            <MenuContainer>
+                <Link to="/" className={classes.linkMenu}>
+                    <Logo src={logo} alt="logo" />
+                </Link>
+                <Menu></Menu>
+            </MenuContainer>
+            <HeaderBreadcrumbsContainer>
+                {props.children}
+            </HeaderBreadcrumbsContainer>
+        </LinksContainer>
+    );
+};
 
 const LinksContainer = styled.div`
     margin-top: 30px;
@@ -34,30 +58,8 @@ const Logo = styled.img`
 `;
 
 const HeaderBreadcrumbsContainer = styled.div`
-    padding-left: 175px;
+    padding-left: 205px;
     font-size: 18px;
 `;
-
-interface HeaderProps {
-    children?: JSX.Element;
-}
-
-const Header: FunctionComponent<HeaderProps> = (
-    props: HeaderProps
-): JSX.Element => {
-    return (
-        <LinksContainer className="links-container">
-            <MenuContainer className="menu-container">
-                <Link to="/" className="link">
-                    <Logo src={logo} alt="logo" />
-                </Link>
-                <Menu></Menu>
-            </MenuContainer>
-            <HeaderBreadcrumbsContainer className="header-breadcrumbs-container">
-                {props.children}
-            </HeaderBreadcrumbsContainer>
-        </LinksContainer>
-    );
-};
 
 export default Header;

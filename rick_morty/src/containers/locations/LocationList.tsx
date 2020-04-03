@@ -13,17 +13,19 @@ import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import SearchBar from "../../components/search-bar/SearchBar";
 import { styles } from "../../styles/ListsStyles";
-import Pager from "../../components/pager/Pager";
+import Pagination from "../../components/pagination/Pagination";
 import image from "../../assets/first_episode.png";
+import Error from "../../components/error/Error";
 
 const LocationsList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const { locations, pages } = useSelector<AppStore, LocationStore>(
-        state => state.locationStore
-    );
+    const { locations, pages, hasError, errorMessage } = useSelector<
+        AppStore,
+        LocationStore
+    >(state => state.locationStore);
     const dispatch = useDispatch();
     const breadCrumbs: BreadCrumb[] = [
         {
@@ -68,7 +70,7 @@ const LocationsList: FunctionComponent = (): JSX.Element => {
             return (
                 <GridListTile key={index}>
                     <img src={image} alt={location.name} />
-                    <Link to={`/locations/${location.id}`} className="header">
+                    <Link to={`/locations/${location.id}`}>
                         <GridListTileBar
                             title={location.name}
                             subtitle={
@@ -87,14 +89,31 @@ const LocationsList: FunctionComponent = (): JSX.Element => {
     const renderPagination = (): JSX.Element => {
         if (pages > 1) {
             return (
-                <Pager
+                <Pagination
                     pageNumbers={pageNumbers()}
                     currentPage={currentPage}
                     pageSelected={(value: number) => onCurrentPageChange(value)}
-                ></Pager>
+                ></Pagination>
             );
         }
         return <div></div>;
+    };
+    const renderContent = (): JSX.Element => {
+        if (hasError) {
+            return <Error title={errorMessage}></Error>;
+        }
+        return (
+            <div>
+                <GridList
+                    cellHeight={230}
+                    cols={4}
+                    className={classes.gridList}
+                >
+                    {renderList()}
+                </GridList>
+                {renderPagination()}
+            </div>
+        );
     };
 
     return (
@@ -110,14 +129,7 @@ const LocationsList: FunctionComponent = (): JSX.Element => {
                         onSubmitSearch={() => onSearchBarTerm()}
                     />
                 </div>
-                <GridList
-                    cellHeight={230}
-                    cols={4}
-                    className={classes.gridList}
-                >
-                    {renderList()}
-                </GridList>
-                {renderPagination()}
+                {renderContent()}
             </div>
         </div>
     );
