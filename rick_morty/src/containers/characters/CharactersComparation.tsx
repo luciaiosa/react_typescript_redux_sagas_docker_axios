@@ -98,7 +98,7 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
         if (showDuplicatedCharactersErrorMessage) {
             return (
                 <div className={classes.errorMessage}>
-                    Sorry, you can't select twice the same character.
+                    Sorry, you can't select the same character twice.
                 </div>
             );
         }
