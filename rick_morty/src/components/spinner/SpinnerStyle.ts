@@ -1,5 +1,5 @@
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const StyledSpinner = styled.svg`
   animation: rotate 2s linear infinite;
