@@ -53,6 +53,9 @@ const CharactersHistory: FunctionComponent = (): JSX.Element => {
         setShowModal(false);
         dispatch(removeCharacterFromHistory(characterHistoryRemovedId));
     };
+    const onCharacterRemoveCancel = () => {
+        setShowModal(false);
+    };
 
     const renderList = () => {
         return visitedCharactersHistory.map(
@@ -106,7 +109,8 @@ const CharactersHistory: FunctionComponent = (): JSX.Element => {
                     title="Remove character history"
                     content="Are you sure that you want to remove the character history?"
                     action="Remove"
-                    onDismiss={() => onCharacterRemoveConfirm()}
+                    onRemove={() => onCharacterRemoveConfirm()}
+                    onCancel={() => onCharacterRemoveCancel()}
                 ></Modal>
             );
         }
