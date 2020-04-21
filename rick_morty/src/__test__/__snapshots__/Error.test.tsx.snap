@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error component should render without throwing an error 1`] = `
+<div
+  className="makeStyles-content-3"
+>
+  <h2>
+    Test error
+  </h2>
+</div>
+`;

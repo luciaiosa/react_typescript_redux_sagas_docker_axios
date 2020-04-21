@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Menu from "../menu/Menu";
 import { useStyles } from "../menu/MenuStyles";
 
-const logo = require("../../assets/logo1.png");
+import logo from "../../assets/logo1.png";
 
 interface HeaderProps {
     children?: JSX.Element;
