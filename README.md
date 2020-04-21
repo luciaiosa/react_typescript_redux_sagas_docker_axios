@@ -120,11 +120,12 @@ yarn add redux-logger @types/redux-logger --save
 npm run test:tsc
 ```
 
-## Install jest y enzime
+## Install jest y enzyme
 
 ```
-yarn add @types/jest ts-jest babel-jest -D
-yarn add enzyme @types/enzyme enzyme-to-json enzyme-adapter-react-16 -D
+yarn add --save react@16 react-dom@16
+yarn add @types/jest ts-jest -D
+yarn add enzyme @types/enzyme enzyme-to-json enzyme-adapter-react-16 @types/enzyme-adapter-react-16 -D
 ```
 
 Jest is a node-based test runner allowing fast parallel running of tests in a node environment. It works out of the box within any Create React App project. Running npm test in a Terminal window within your app directory will initialise Jest and start testing in watch mode — meaning changes to files will re-run the tests associated with those files immediately as you are developing.
