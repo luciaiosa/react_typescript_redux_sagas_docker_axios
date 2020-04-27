@@ -27,7 +27,7 @@
     "@types/styled-components": "^5.0.1",
     "axios": "^0.19.2",
     "install": "^0.13.0",
-    "jest": "^25.4.0",
+    "jest": "^24.9.0",
     "npm": "^6.14.4",
     "react": "^16.13.1",
     "react-data-components": "^1.2.0",
@@ -75,6 +75,6 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.4",
-    "ts-jest": "^25.4.0"
+    "ts-jest": "^24.9.0"
   }
 }

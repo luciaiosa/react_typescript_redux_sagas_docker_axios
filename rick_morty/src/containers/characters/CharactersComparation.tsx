@@ -14,6 +14,7 @@ import { setBreadcrumbs } from "../../store/app";
 import { styles } from "../../styles/ListsStyles";
 import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
 import Error from "../../components/error/Error";
+import {formattedDate} from '../../utils/dates';
 
 const CharactersComparation: FunctionComponent = (): JSX.Element => {
     const classes = styles();
@@ -126,7 +127,7 @@ const CharactersComparation: FunctionComponent = (): JSX.Element => {
                             <div className={classes.descriptionRow}>
                                 <p className={classes.description}>
                                     Id: {character.id} - created:{" "}
-                                    {character.created}
+                                    {formattedDate(character.created)}
                                 </p>
                             </div>
                             <div className={classes.descriptionRow}>

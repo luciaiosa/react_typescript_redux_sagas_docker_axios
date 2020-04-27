@@ -12,6 +12,7 @@ import { styles } from "../../styles/ListsStyles";
 import Pagination from "../../components/pagination/Pagination";
 import image from "../../assets/last_episode.png";
 import Error from "../../components/error/Error";
+import {formattedDate} from '../../utils/dates';
 
 const EpisodesList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
@@ -72,7 +73,7 @@ const EpisodesList: FunctionComponent = (): JSX.Element => {
                             subtitle={
                                 <span>
                                     id: {episode.id} - created:{" "}
-                                    {episode.created}
+                                    {formattedDate(episode.created)}
                                 </span>
                             }
                         />

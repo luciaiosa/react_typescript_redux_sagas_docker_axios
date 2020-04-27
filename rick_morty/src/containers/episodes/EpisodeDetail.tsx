@@ -11,6 +11,7 @@ import { setBreadcrumbs } from "../../store/app";
 import { styles } from "../../styles/DescriptionStyles";
 import image from "../../assets/first_episode.png";
 import Error from "../../components/error/Error";
+import {formattedDate} from '../../utils/dates';
 
 type TParams = { id: string };
 
@@ -71,7 +72,7 @@ const EpisodeDetail: FunctionComponent<RouteComponentProps<TParams>> = (
                         <div className={classes.descriptionRow}>
                             <p className={classes.description}>
                                 Id: {selectedEpisode.id} - created:{" "}
-                                {selectedEpisode.created}
+                                {formattedDate(selectedEpisode.created)}
                             </p>
                         </div>
                         <div className={classes.descriptionRow}>

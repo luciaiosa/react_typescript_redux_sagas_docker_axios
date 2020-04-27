@@ -10,6 +10,7 @@ import { AppStore, BreadCrumb } from "../../store/app/AppStore";
 import { setBreadcrumbs } from "../../store/app";
 import { styles } from "../../styles/DescriptionStyles";
 import Error from "../../components/error/Error";
+import {formattedDate} from '../../utils/dates';
 
 type TParams = { id: string };
 
@@ -71,7 +72,7 @@ const CharacterDetail: FunctionComponent<RouteComponentProps<TParams>> = (
                         <div className={classes.descriptionRow}>
                             <p className={classes.description}>
                                 Id: {selectedCharacter.id} - created:{" "}
-                                {selectedCharacter.created}
+                                {formattedDate(selectedCharacter.created)}
                             </p>
                         </div>
                         <div className={classes.descriptionRow}>

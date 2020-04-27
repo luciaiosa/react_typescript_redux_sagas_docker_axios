@@ -16,6 +16,7 @@ import { styles } from "../../styles/ListsStyles";
 import Pagination from "../../components/pagination/Pagination";
 import image from "../../assets/first_episode.png";
 import Error from "../../components/error/Error";
+import {formattedDate} from '../../utils/dates';
 
 const LocationsList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
@@ -76,7 +77,7 @@ const LocationsList: FunctionComponent = (): JSX.Element => {
                             subtitle={
                                 <span>
                                     id: {location.id} - created:{" "}
-                                    {location.created}
+                                    {formattedDate(location.created)}
                                 </span>
                             }
                         />

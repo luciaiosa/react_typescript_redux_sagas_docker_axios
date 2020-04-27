@@ -11,6 +11,7 @@ import { setBreadcrumbs } from "../../store/app";
 import { styles } from "../../styles/DescriptionStyles";
 import image from "../../assets/last_episode.png";
 import Error from "../../components/error/Error";
+import {formattedDate} from '../../utils/dates';
 
 type TParams = { id: string };
 
@@ -72,7 +73,7 @@ const LocationDetail: FunctionComponent<RouteComponentProps<TParams>> = (
                         <div className={classes.descriptionRow}>
                             <p className={classes.description}>
                                 Id: {selectedLocation.id} - created:{" "}
-                                {selectedLocation.created}
+                                {formattedDate(selectedLocation.created)}
                             </p>
                         </div>
                         <div className={classes.descriptionRow}>

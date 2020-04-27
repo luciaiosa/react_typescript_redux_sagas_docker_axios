@@ -15,12 +15,17 @@ import SearchBar from "../../components/search-bar/SearchBar";
 import { styles } from "../../styles/ListsStyles";
 import Pagination from "../../components/pagination/Pagination";
 import Error from "../../components/error/Error";
+import {formattedDate} from '../../utils/dates';
 
 const CharactersList: FunctionComponent = (): JSX.Element => {
     const classes = styles();
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
 
+    /* useSelector is a function that takes the current state as an argument 
+    and returns whatever data you want from it. It’s very similiar to mapStateToProps() 
+    and it allows to store the return values inside a variable within the scope of the 
+    functional components instead of passing down as props */
     const { characters, pages, hasError, errorMessage } = useSelector<
         AppStore,
         CharacterStore
@@ -75,7 +80,7 @@ const CharactersList: FunctionComponent = (): JSX.Element => {
                             subtitle={
                                 <span>
                                     id: {character.id} - created:{" "}
-                                    {character.created}
+                                    {formattedDate(character.created)}
                                 </span>
                             }
                         />
