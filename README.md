@@ -1,8 +1,8 @@
-# react_typescript_redux_sagas_docker_axios
+### react_typescript_redux_sagas_docker_axios
 
 .tsx = typescript y jsx
 
-## initialize an empty package.json file to store your project's dependencies installed via npm
+## Initialize an empty package.json file to store your project's dependencies installed via npm
 
 npm init
 
